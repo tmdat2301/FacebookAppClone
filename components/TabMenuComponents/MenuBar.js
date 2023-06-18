@@ -1,7 +1,8 @@
 import React from 'react';
-import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import FIcon from 'react-native-vector-icons/Ionicons';
-import {StyleSheet, View, Text, TouchableOpacity,TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import FIcon from 'react-native-vector-icons/Feather';
+
 const styles = StyleSheet.create({
   Container: {
     flexDirection: 'row',
@@ -12,15 +13,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  Text: {
+    marginLeft: 16,
+    color: '#000',
+    fontSize: 25,
+    fontWeight: '700',
+    letterSpacing: -0.3,
+  },
   Row: {
     flexDirection: 'row',
-  },
-  Text: {
-    color: '#3a86e9',
-    fontSize: 25,
-    fontWeight: 'bold',
-    letterSpacing: -0.3,
-    marginLeft:12
   },
   Button: {
     width: 36,
@@ -32,21 +33,19 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
 });
-const AppBar = () => {
+const MenuBar = () => {
   return (
     <View style={styles.Container}>
-    
-      <Text style={styles.Text}>facebook</Text>
+      <Text style={styles.Text}>Menu</Text>
       <View style={styles.Row}>
         <TouchableOpacity style={styles.Button}>
-          <FIcon name="search" size={24} color="black"  />
-          
+            <Icon name='settings-sharp' size={24} color="black"/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.Button}>
-          <MCIcon name="facebook-messenger" size={24} color="black"/>
+            <Icon name='search' size={24} color="black"/>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-export default AppBar;
+export default MenuBar;

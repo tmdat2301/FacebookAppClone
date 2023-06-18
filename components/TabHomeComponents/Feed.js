@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   Text: {
     fontSize: 12,
     color: '#424040',
+    marginTop:2
   },
   BottomDivider: {
     width: '100%',
@@ -207,7 +208,7 @@ const FakeNewfeedData = [
       {
         description: 'Hè 2023, đâu đó trên một boong tàu bên bờ biển Miami tuyệt đẹp Chủ tịch Inter Miami, David Beckham đang chơi bóng cùng GOAT',
         image:
-          'https://scontent.fhan2-5.fna.fbcdn.net/v/t39.30808-6/352535162_111171695321410_2149993693898882703_n.jpg?stp=cp6_dst-jpg&_nc_cat=104&ccb=1-7&_nc_sid=5cd70e&_nc_ohc=zn2aij2atgUAX9tA6GT&_nc_ht=scontent.fhan2-5.fna&oh=00_AfBUdD1YT1LbbRcDSfDNF4aAZpI2SW2Lf3UFGZHgYTUoxQ&oe=64871A3E',
+          'https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png',
       },
     ],
     interaction: [
@@ -269,13 +270,13 @@ const RenderNewfeed = () => {
             <View style={styles.FooterMenu}>
               <TouchableOpacity style={styles.Button}>
                 <View style={styles.Icon}>
-                  <AIcon name="like2" size={20} color="#424040" />
+                  <AIcon name="like2" size={18} color="#424040" />
                 </View>
                 <Text style={styles.Text}>Like</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Button}>
                 <View style={styles.Icon}>
-                  <MIcon name="comment-outline" size={20} color="#424040" />
+                  <MIcon name="comment-outline" size={18} color="#424040" />
                 </View>
                 <Text style={styles.Text}>Comment</Text>
               </TouchableOpacity>
