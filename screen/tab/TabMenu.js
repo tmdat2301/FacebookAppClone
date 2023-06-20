@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useRef} from 'react';
 import {
   View,
   Text,
@@ -21,6 +21,7 @@ import {BlurView} from '@react-native-community/blur';
 
 export default function TabMenu({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
+  const scrollViewRef = useRef();
 
   const Logout = async () => {
     await AsyncStorage.removeItem('token');
@@ -29,15 +30,13 @@ export default function TabMenu({navigation}) {
   return (
     <>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-      {/* <ImageBackground > */}
-      {/* <BlurView
-        style={styles.absolute}
-        blurType="light"
-        blurAmount={10}
-        reducedTransparencyFallbackColor="white">
-          </BlurView> */}
+
       <SafeAreaView style={styles.container}>
-        <ScrollView>
+        <ScrollView
+          ref={scrollViewRef}
+          onContentSizeChange={() =>
+            scrollViewRef.current.scrollToEnd({animated: true})
+          }>
           <MenuBar />
           <Profile />
           <Shortcut />
@@ -45,7 +44,7 @@ export default function TabMenu({navigation}) {
           <TouchableOpacity
             style={styles.LogoutButton}
             onPress={() => {
-              setModalVisible(!modalVisible);
+              setModalVisible(true);
             }}>
             <Text style={styles.TextButton}>Log out</Text>
           </TouchableOpacity>
@@ -80,7 +79,6 @@ export default function TabMenu({navigation}) {
             </View>
           </Modal>
         </View>
-        
       </SafeAreaView>
 
       {/* </ImageBackground> */}
@@ -91,6 +89,8 @@ export default function TabMenu({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    //  backgroundColor:'#ccc',
+    //  opacity:0.7
   },
   Row: {
     flexDirection: 'row',
@@ -130,13 +130,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     shadowColor: '#000',
+    borderTopWidth: 1,
+    borderColor: '#D0D0D0',
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
     shadowOffset: {
+      height: -10,
       width: 0,
-      height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    elevation: 100,
   },
 
   buttonOpen: {

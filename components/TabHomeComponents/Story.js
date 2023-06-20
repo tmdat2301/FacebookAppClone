@@ -206,7 +206,7 @@ const Story = () => {
             <Image
               style={styles.CardStory}
               source={{
-                uri: 'https://res.cloudinary.com/jerrick/image/upload/v1613318166/60294816e5abae001c5260be.jpg',
+                uri: 'https://www.photoshopessentials.com/newsite/wp-content/uploads/2018/08/resize-images-print-photoshop-f.jpg',
               }}
             />
             <View style={styles.CardUser}>
