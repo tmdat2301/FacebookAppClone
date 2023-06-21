@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FIcon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+
 
 const styles = StyleSheet.create({
   Container: {
@@ -34,11 +35,13 @@ const styles = StyleSheet.create({
   },
 });
 const MenuBar = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.Container}>
       <Text style={styles.Text}>Menu</Text>
       <View style={styles.Row}>
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button} onPress={()=>navigation.navigate('SettingDetailScreen')}>
             <Icon name='settings-sharp' size={24} color="black"/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.Button}>

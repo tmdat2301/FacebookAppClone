@@ -8,20 +8,20 @@ import {
   StyleSheet,
   ScrollView,
   Modal,
-  Pressable,
-  ImageBackground,
 } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MenuBar from '../../components/TabMenuComponents/MenuBar';
 import Profile from '../../components/TabMenuComponents/Profile';
 import Shortcut from '../../components/TabMenuComponents/Shortcut';
-import Extending from '../../components/TabMenuComponents/Extending';
-import {BlurView} from '@react-native-community/blur';
+import Expanding from '../../components/TabMenuComponents/Expanding';
+import { useNavigation } from '@react-navigation/native';
 
-export default function TabMenu({navigation}) {
+export default function TabMenu({}) {
   const [modalVisible, setModalVisible] = useState(false);
   const scrollViewRef = useRef();
+
+  const navigation = useNavigation();
 
   const Logout = async () => {
     await AsyncStorage.removeItem('token');
@@ -35,12 +35,13 @@ export default function TabMenu({navigation}) {
         <ScrollView
           ref={scrollViewRef}
           onContentSizeChange={() =>
-            scrollViewRef.current.scrollToEnd({animated: true})
-          }>
+            scrollViewRef.current.scrollToEnd({animated: false})
+          }
+          >
           <MenuBar />
           <Profile />
           <Shortcut />
-          <Extending />
+          <Expanding />
           <TouchableOpacity
             style={styles.LogoutButton}
             onPress={() => {

@@ -4,7 +4,8 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import FIcon from 'react-native-vector-icons/Fontisto';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import Collapsible from 'react-native-collapsible';
-import MIcon from 'react-native-vector-icons/MaterialIcons'
+import MIcon from 'react-native-vector-icons/MaterialIcons';
+import SettingDetailScreen from '../../screen/SettingDetailScreen';
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 18,
     marginLeft: 20,
-    fontWeight:500
+    fontWeight: 500,
   },
   Icon: {
     flex: 1,
@@ -44,8 +45,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   collapsedButton: {
-    alignItems:'center',
-    flexDirection:'row',
+    alignItems: 'center',
+    flexDirection: 'row',
     backgroundColor: '#fff',
     marginLeft: 16,
     marginRight: 16,
@@ -61,16 +62,24 @@ const styles = StyleSheet.create({
 
     elevation: 1,
   },
-  SubIcon:{
-    marginLeft:10,
-    marginRight:10,
-    marginTop:15,
-    marginBottom:15,
-    color:'#B1C9CF',
-    fontSize:22,
-  }
+  SubIcon: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 15,
+    marginBottom: 15,
+    color: '#B1C9CF',
+    fontSize: 22,
+  },
 });
-const Extending = () => {
+import { useNavigation } from '@react-navigation/native';
+
+const Expanding=({})=> {
+  const navigation = useNavigation();
+
+  const Onpress=()=>{
+    navigation.navigate('SettingDetailScreen')
+  }
+
   const [collapsed, setCollapsed] = useState(true);
   const handleExpand = () => {
     setCollapsed(!collapsed);
@@ -108,29 +117,31 @@ const Extending = () => {
       </TouchableOpacity>
       <Collapsible collapsed={collapsed}>
         <View>
-          <TouchableOpacity style={styles.collapsedButton}>
-            <FAIcon style={styles.SubIcon} name='user-circle'  />
+          <TouchableOpacity
+            style={styles.collapsedButton}
+            onPress={Onpress}>
+            <FAIcon style={styles.SubIcon} name="user-circle" />
             <Text style={styles.CollapsedText}>Settings</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
-            <MIcon style={styles.SubIcon} name='perm-device-info'/>
+            <MIcon style={styles.SubIcon} name="perm-device-info" />
             <Text style={styles.CollapsedText}>Device requests</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
-            <MIcon name='photo-camera-back' style={styles.SubIcon}/>
+            <MIcon name="photo-camera-back" style={styles.SubIcon} />
             <Text style={styles.CollapsedText}>Recent ad activity</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
-            <AIcon name='wifi' style={styles.SubIcon} />
+            <AIcon name="wifi" style={styles.SubIcon} />
             <Text style={styles.CollapsedText}>Find Wi-Fi</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
-            <MIcon name='payment' style={styles.SubIcon}/>
+            <MIcon name="payment" style={styles.SubIcon} />
             <Text style={styles.CollapsedText}>Orders and payments</Text>
           </TouchableOpacity>
         </View>
       </Collapsible>
     </View>
   );
-};
-export default Extending;
+}
+export default Expanding;
