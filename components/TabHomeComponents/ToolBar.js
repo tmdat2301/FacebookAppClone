@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#D0D0D0',
   },
   centeredView: {
-    // backgroundColor:'red',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

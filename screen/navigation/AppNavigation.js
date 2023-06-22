@@ -10,7 +10,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import LoginScreen from '../LoginScreen';
 import SettingDetailScreen from '../SettingDetailScreen';
 import Expanding from '../../components/TabMenuComponents/Expanding';
-
+import LangNreScreen from '../LangNreScreen';
 
 const Stack=createNativeStackNavigator();
 // const AppNavigation=()=>{
@@ -133,6 +133,7 @@ const AppNavigation =()=>{
       <Stack.Screen name='LoginScreen' component={LoginScreen}/>
       <Stack.Screen name='SettingDetailScreen' component={SettingDetailScreen}/>
       <Stack.Screen name='Expanding' component={Expanding}/>
+      <Stack.Screen name='LanguageAndRegionScreen' component={LangNreScreen}/>
     </Stack.Navigator>
   )
     

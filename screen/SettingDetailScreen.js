@@ -8,7 +8,9 @@ import {
 } from 'react-native';
 import FIcon from 'react-native-vector-icons/Fontisto';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import UserIcon from 'react-native-vector-icons/FontAwesome';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import EIcon from 'react-native-vector-icons/Entypo';
 import OIcon from 'react-native-vector-icons/Octicons';
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
   HeadText: {
     fontSize: 18,
     color: 'black',
-    fontWeight: 'bold',
+    fontWeight: 600,
   },
   SubHeadText: {
     fontSize: 18,
@@ -111,6 +113,11 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     marginRight: 16,
     height: 0.7,
+    backgroundColor: '#CCC',
+  },
+  SectionDevider:{
+   width:'100%',
+   height: 0.7,
     backgroundColor: '#CCC',
   },
   SecondSubHeadView: {
@@ -158,7 +165,7 @@ const SettingDetailScreen = ({navigation}) => {
     <>
       <View style={styles.Container}>
         <View style={styles.Header}>
-          <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <FIcon name="angle-left" style={styles.Icon} />
           </TouchableOpacity>
           <Text style={styles.HeadText}>Settings & privacy</Text>
@@ -166,6 +173,7 @@ const SettingDetailScreen = ({navigation}) => {
             <FIcon name="search" style={styles.Icon} />
           </TouchableOpacity>
         </View>
+        <View style={styles.SectionDevider}></View>
         <ScrollView>
           <View style={styles.HeadView}>
             <View style={styles.HeadTextContainer}>
@@ -231,7 +239,9 @@ const SettingDetailScreen = ({navigation}) => {
                 <EIcon name="pin" style={styles.SubIcon} />
                 <Text style={styles.SubHeadText}>Navigation bar</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.Row}>
+              <TouchableOpacity
+              onPress={()=>navigation.navigate('LanguageAndRegionScreen')}
+              style={styles.Row}>
                 <Icon name="globe-sharp" style={styles.SubIcon} />
                 <Text style={styles.SubHeadText}>Language and region</Text>
               </TouchableOpacity>
@@ -263,9 +273,96 @@ const SettingDetailScreen = ({navigation}) => {
                 Control who can see your posts, stories and profile.
               </Text>
             </View>
+            <View style={styles.TextPre}>
+              <TouchableOpacity style={styles.Row}>
+                <UserIcon name="user-circle-o" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Profile details</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MCIcon name="contacts" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>
+                  How people find and contact you
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MCIcon
+                  name="newspaper-variant-outline"
+                  style={styles.SubIcon}
+                />
+                <Text style={styles.SubHeadText}>Posts</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MIcon name="photo-library" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Stories</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MCIcon name="movie-open-play" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Reels</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <FAIcon name="tag" style={styles.ResizeIcon} />
+                <Text style={styles.SubHeadText}>Profile and Tagging</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MIcon name="block" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Blocking</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <FIcon name="radio-btn-active" style={styles.ResizeIcon} />
+                <Text style={styles.SubHeadText}>Active Status</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View
-            style={{backgroundColor: '#fff', width: '100%', height: 20}}></View>
+
+          <View style={styles.Separator}></View>
+
+          <View style={styles.SectionContainer}>
+            <View style={styles.SectionText}>
+              <Text style={styles.LargeText}>Your activity</Text>
+              <Text style={styles.SubHeadTextSmall}>
+                Access a log of your activity and control storage of your voice
+                searches.
+              </Text>
+            </View>
+            <View style={styles.TextPre}>
+              <TouchableOpacity style={styles.Row}>
+                <MIcon name="local-activity" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Activity log</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MCIcon name="devices" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Device permissions</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.Separator}></View>
+
+          <View style={styles.SectionContainer}>
+            <View style={styles.SectionText}>
+              <Text style={styles.LargeText}>
+                Community Standards and Legal Policies
+              </Text>
+            </View>
+            <View style={styles.TextPre}>
+              <TouchableOpacity style={styles.Row}>
+                <EIcon name="book" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Terms of service</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MCIcon name="database-arrow-left" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Privacy Policy</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MCIcon name="arrow-collapse-vertical" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Cookies Policy</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Row}>
+                <MCIcon name="check-decagram" style={styles.SubIcon} />
+                <Text style={styles.SubHeadText}>Community Standards</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </ScrollView>
       </View>
     </>
