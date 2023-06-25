@@ -15,6 +15,7 @@ import AppBar from '../../components/TabHomeComponents/AppBar.js';
 import ToolBar from '../../components/TabHomeComponents/ToolBar.js';
 import Story from '../../components/TabHomeComponents/Story.js';
 import Feed from '../../components/TabHomeComponents/Feed.js';
+
 const WIDTH = Dimensions.get('screen').width;
 const HEIGHT = Dimensions.get('screen').height;
 

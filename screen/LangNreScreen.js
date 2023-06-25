@@ -1,65 +1,61 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, Text, View, StyleSheet, Modal,Flatlist} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  StyleSheet,
+  Modal,
+  Flatlist,
+} from 'react-native';
 import FIcon from 'react-native-vector-icons/Fontisto';
 
 const OPTIONS = [
-  'English',
-  'French',
-  'Spanish',
-  'Chinese',
-  'Korean',
-  'Dutch',
-  'German',
-  'Japanese',
-  'Vietnamese',
+  {
+    id: 1,
+    language: 'English',
+    selected: false,
+  },
+  {
+    id: 2,
+    language: 'French',
+    selected: false,
+  },
+  {
+    id: 3,
+    language: 'Spanish',
+    selected: false,
+  },
+  {
+    id: 4,
+    language: 'Chinese',
+    selected: false,
+  },
+  {
+    id: 5,
+    language: 'Korean',
+    selected: false,
+  },
+  {
+    id: 6,
+    language: 'Dutch',
+    selected: false,
+  },
+  {
+    id: 7,
+    language: 'German',
+    selected: false,
+  },
+  {
+    id: 8,
+    language: 'Japanese',
+    selected: false,
+  },
+  {
+    id: 9,
+    language: 'Vietnamese',
+    selected: false,
+  },
 ];
-// const OPTIONS=[
-//   {
-//     id:1,
-//     language:'English',
-//     selected:false,
-//   },
-//   {
-//     id:2,
-//     language:'French',
-//     selected:false,
-//   },
-//   {
-//     id:3,
-//     language:'Spanish',
-//     selected:false,
-//   },
-//   {
-//     id:4,
-//     language:'Chinese',
-//     selected:false,
-//   },
-//   {
-//     id:5,
-//     language:'Korean',
-//     selected:false,
-//   },
-//   {
-//     id:6,
-//     language:'Dutch',
-//     selected:false,
-//   },
-//   {
-//     id:7,
-//     language:'German',
-//     selected:false,
-//   },
-//   {
-//     id:8,
-//     language:'Japanese',
-//     selected:false,
-//   },
-//   {
-//     id:9,
-//     language:'Vietnamese',
-//     selected:false,
-//   },
-// ]
 
 const styles = StyleSheet.create({
   ParentContainer: {
@@ -176,7 +172,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   SaveButton: {
-    // backgroundColor:'red',
     width: 56,
     marginLeft: 10,
     marginTop: 5,
@@ -184,28 +179,64 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#646466',
   },
+  TextLanguage: {
+    fontSize: 15,
+    color: '#000',
+    marginLeft: 15,
+    marginTop: 30,
+    marginBottom: 16,
+  },
 });
 
 const ModalPicker = prop => {
+  const [language, setLanguage] = useState([]);
+  const [langName,setLangName]=useState('');
   const onPressItem = option => {
     prop.changeModalVisibility(false);
     prop.setData(option);
   };
+  const setSelectedIndex = id => {
+    OPTIONS.map((item, index) => {
+      if (index == id) {
+        OPTIONS[index].selected = true;
+        // onPressItem(OPTIONS[index].language)
+        setLangName(OPTIONS[index].language)
+      } else {
+        OPTIONS[index].selected = false;
+      }
+    });
+    setLanguage([...OPTIONS]);
+  };
   const option = OPTIONS.map((item, index) => {
     return (
       <View>
-        <Text
-          key={index}
-          onPress={() => onPressItem(item)}
-          style={{
-            fontSize: 15,
-            color: '#000',
-            marginLeft: 15,
-            marginTop: 30,
-            marginBottom: 16,
-          }}>
-          {item}
-        </Text>
+        <TouchableOpacity onPress={() => setSelectedIndex(index)}>
+          {item.selected ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text
+                key={index}
+                style={styles.TextLanguage}>
+                {item.language}
+              </Text>
+              <FIcon
+                style={{marginTop: 15, marginRight: 16}}
+                name="check"
+                color="blue"
+                size={10}
+              />
+            </View>
+          ) : (
+            <Text key={index} style={styles.TextLanguage}>
+              {item.language}
+            </Text>
+          )}
+        </TouchableOpacity>
+
         <View style={styles.LanguageDevider}></View>
       </View>
     );
@@ -220,21 +251,19 @@ const ModalPicker = prop => {
       </View>
       <View style={styles.SectionDevider}></View>
       <Text style={styles.TitleLangText}>
-        You'll have the option to translate posts into this language.
+        You'll have the option to change app system into this language.
       </Text>
-      <TouchableOpacity style={styles.SaveButton}>
+      <TouchableOpacity onPress={()=>onPressItem(langName)} style={styles.SaveButton}>
         <Text style={[styles.SubText, {paddingLeft: 9}]}>Save</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => prop.changeModalVisibility(false)}>
-        {option}
-      </TouchableOpacity>
+      <TouchableOpacity>{option}</TouchableOpacity>
     </View>
   );
 };
 
 const LangNreScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [chooseData, setChooseData] = useState('Init');
+  const [chooseData, setChooseData] = useState('...');
   const changeModalVisibility = bool => {
     setModalVisible(bool);
   };

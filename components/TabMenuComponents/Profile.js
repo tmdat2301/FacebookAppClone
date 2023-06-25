@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
   },
   Separator: {
     marginTop:10,
-    width: '100%',
     height: 0.7,
     backgroundColor: '#D0D0D0',
+    marginRight:16
   },
 });
 export default Profile;
