@@ -16,8 +16,9 @@ import Profile from '../../components/TabMenuComponents/Profile';
 import Shortcut from '../../components/TabMenuComponents/Shortcut';
 import Expanding from '../../components/TabMenuComponents/Expanding';
 import { useNavigation } from '@react-navigation/native';
-
+import {useTranslation} from 'react-i18next';
 export default function TabMenu({}) {
+  const {t}=useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const scrollViewRef = useRef();
 
@@ -47,7 +48,7 @@ export default function TabMenu({}) {
             onPress={() => {
               setModalVisible(true);
             }}>
-            <Text style={styles.TextButton}>Log out</Text>
+            <Text style={styles.TextButton}>{t('logout')}</Text>
           </TouchableOpacity>
           <View style={styles.ViewEmpty}></View>
         </ScrollView>
@@ -61,19 +62,19 @@ export default function TabMenu({}) {
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Log out of your account?</Text>
+                <Text style={styles.modalText}>{t("logoutConfirm")}</Text>
                 <View style={styles.SeparatorHorizontal}></View>
                 <View style={styles.ButtonConfirmation}>
                   <TouchableOpacity
                     style={styles.ButtonConfirmContainer}
                     onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={styles.textStyleCancel}>Cancel</Text>
+                    <Text style={styles.textStyleCancel}>{t('cancel')}</Text>
                   </TouchableOpacity>
                   <View style={styles.SeparatorVertical}></View>
                   <TouchableOpacity
                     style={styles.ButtonConfirmContainer}
                     onPress={Logout}>
-                    <Text style={styles.textStyleLogout}>Log out</Text>
+                    <Text style={styles.textStyleLogout}>{t('logout')}</Text>
                   </TouchableOpacity>
                 </View>
               </View>

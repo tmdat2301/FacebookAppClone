@@ -154,12 +154,12 @@ const FakeNewfeedData = [
   },
 ];
 
-const RenderHomeScreen = ({item,index}) => {
+const RenderHomeScreen = ({item}) => {
   // console.log(item);
   return (
     <>
       {/* <Text> {item.user[0].name}</Text> */}
-      <Feed key={item.id} feedData={item} />
+      <Feed feedData={item} />
     </>
   );
 };
@@ -241,7 +241,6 @@ const TabHome = ({navigation}) => {
 
         <FlatList
           data={data}
-
           renderItem={RenderHomeScreen}
           keyExtractor={item => item.id}
           refreshControl={
