@@ -15,6 +15,9 @@ import AppBar from '../../components/TabHomeComponents/AppBar.js';
 import ToolBar from '../../components/TabHomeComponents/ToolBar.js';
 import Story from '../../components/TabHomeComponents/Story.js';
 import Feed from '../../components/TabHomeComponents/Feed.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useTranslation} from 'react-i18next';
+
 
 const WIDTH = Dimensions.get('screen').width;
 const HEIGHT = Dimensions.get('screen').height;
@@ -151,19 +154,39 @@ const FakeNewfeedData = [
   },
 ];
 
-const RenderHomeScreen = ({item}) => {
+const RenderHomeScreen = ({item,index}) => {
   // console.log(item);
   return (
     <>
       {/* <Text> {item.user[0].name}</Text> */}
-      <Feed feedData={item} />
+      <Feed key={item.id} feedData={item} />
     </>
   );
 };
 
 const TabHome = ({navigation}) => {
+  const {t, i18n} = useTranslation();
+
   const [isLoading, setIsLoading] = useState(false);
   const [refreshControl, setRefreshControl] = useState(false);
+
+  useEffect(()=>{
+    getData();
+  },[])
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('language');
+      if (value !== null) {
+          i18n.changeLanguage(value);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+  
+  
+
 
   const newDataLoadMore = {
     user: [
@@ -218,6 +241,7 @@ const TabHome = ({navigation}) => {
 
         <FlatList
           data={data}
+
           renderItem={RenderHomeScreen}
           keyExtractor={item => item.id}
           refreshControl={

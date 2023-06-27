@@ -15,6 +15,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import LinearGradient from 'react-native-linear-gradient';
 import MaskedView from '@react-native-community/masked-view';
 import AIcon from 'react-native-vector-icons/AntDesign';
+import {useTranslation} from 'react-i18next';
+
 
 const Data = [
   {
@@ -189,6 +191,8 @@ margin:10
 });
 
 const RenderShortcutItem = () => {
+  const {t, i18n} = useTranslation();
+  
   return (
     <>
       <View style={styles.ShortcutItemContainer}>
@@ -196,13 +200,13 @@ const RenderShortcutItem = () => {
           <View style={styles.Icon}>
             <MCIcon name="heart" size={25} color="#ef473a" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Dating</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('dating')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ShortcutItem}>
           <View style={styles.Icon}>
             <MIcon name="ondemand-video" size={25} color="#11998e" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Videos on Watch</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('videosOnWatch')}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.ShortcutItemContainer}>
@@ -210,13 +214,13 @@ const RenderShortcutItem = () => {
           <View style={styles.Icon}>
             <MCIcon name="post-outline" size={25} color="#4286f4" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Feeds</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('feeds')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ShortcutItem}>
           <View style={styles.Icon}>
             <MIcon name="save" size={25} color="#f80759" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Saved</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('saved')}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.ShortcutItemContainer}>
@@ -224,13 +228,13 @@ const RenderShortcutItem = () => {
           <View style={styles.Icon}>
             <AIcon name="flag" size={25} color="#f12711" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Pages</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('pages')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ShortcutItem}>
           <View style={styles.Icon}>
             <FAIcon name="user-friends" size={22} color="#11998e" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Friends</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('friends')}</Text>
         </TouchableOpacity>
       </View>
       <View>
@@ -239,13 +243,13 @@ const RenderShortcutItem = () => {
             <View style={styles.Icon}>
               <MCIcon name="account-group" size={26} color="#4286f4" />
             </View>
-            <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Groups</Text>
+            <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('groups')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.ShortcutItem}>
             <View style={styles.Icon}>
               <MCIcon name="fireplace-off" size={25} color="#11998e" />
             </View>
-            <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Marketplace</Text>
+            <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('marketplace')}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -254,13 +258,13 @@ const RenderShortcutItem = () => {
           <View style={styles.Icon}>
             <MCIcon name="clock-check-outline" size={25} color="#4286f4" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Memories</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('memories')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ShortcutItem}>
           <View style={styles.Icon}>
             <MIcon name="video-library" size={25} color="#f12711" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Reels</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('reels')}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.ShortcutItemContainer}>
@@ -268,13 +272,13 @@ const RenderShortcutItem = () => {
           <View style={styles.Icon}>
             <MIcon name="event" size={25} color="#ef473a" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Events</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('events')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ShortcutItem}>
           <View style={styles.Icon}>
             <MIcon name="videogame-asset" size={25} color="#4286f4" />
           </View>
-          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>Gaming</Text>
+          <Text style={{marginLeft:10,fontSize: 16, color: 'black'}}>{t('gaming')}</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -332,9 +336,11 @@ const RenderShortcutCard = () => {
 };
 
 const Shortcut = () => {
+  const {t, i18n} = useTranslation();
+
   return (
     <View style={styles.Container}>
-      <Text style={styles.Text}>Your shortcuts</Text>
+      <Text style={styles.Text}>{t('yourShortcuts')}</Text>
 
       <ScrollView
         horizontal
@@ -342,10 +348,10 @@ const Shortcut = () => {
         style={styles.CardContainer}>
         <RenderShortcutCard />
       </ScrollView>
-      <Text style={styles.Texts}>All shortcuts</Text>
+      <Text style={styles.Texts}>{t('allShortcuts')}</Text>
       <RenderShortcutItem />
       <TouchableOpacity style={styles.Button}>
-        <Text style={styles.TextButton}>See more</Text>
+        <Text style={styles.TextButton}>{t('seeMore')}</Text>
       </TouchableOpacity>
       <View style={styles.Separator}></View>
     </View>

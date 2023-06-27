@@ -5,13 +5,12 @@ import {
   Image,
   View,
   Text,
-  Alert,
   Modal,
-  Pressable,
   TouchableOpacity,
 } from 'react-native';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import Avatar from './Avatar';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   Container: {
@@ -195,6 +194,7 @@ const RenderStory = () => {
 };
 
 const Story = () => {
+  const {t}=useTranslation();
   return (
     <>
       <View style={styles.Container}>
@@ -214,7 +214,7 @@ const Story = () => {
             </View>
             <View style={styles.CardFooter}>
               <Text style={{color: 'white', fontSize: 20, fontWeight: 500}}>
-                Create story
+                {t('createStory')}
               </Text>
             </View>
           </View>

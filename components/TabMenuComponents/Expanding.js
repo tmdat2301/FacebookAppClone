@@ -6,6 +6,7 @@ import AIcon from 'react-native-vector-icons/AntDesign';
 import Collapsible from 'react-native-collapsible';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import SettingDetailScreen from '../../screen/SettingDetailScreen';
+import { useTranslation } from 'react-i18next';
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
@@ -74,6 +75,8 @@ const styles = StyleSheet.create({
 import { useNavigation } from '@react-navigation/native';
 
 const Expanding=({})=> {
+  const {t, i18n} = useTranslation();
+
   const navigation = useNavigation();
 
   const Onpress=()=>{
@@ -89,7 +92,7 @@ const Expanding=({})=> {
       <TouchableOpacity>
         <View style={styles.BlockElement}>
           <AIcon name="questioncircle" size={26} color="#B1C9CF" />
-          <Text style={styles.Text}>Help & support</Text>
+          <Text style={styles.Text}>{t('help&Support')}</Text>
           <View style={styles.Icon}>
             <FAIcon name="chevron-down" size={14} color="black" />
           </View>
@@ -101,9 +104,9 @@ const Expanding=({})=> {
         <View style={styles.BlockElement}>
           <FIcon name="player-settings" color="#B1C9CF" size={26} />
           {collapsed ? (
-            <Text style={styles.Text}>Settings & privacy</Text>
+            <Text style={styles.Text}>{t('settings&Privacy')}</Text>
           ) : (
-            <Text style={styles.TextHighlight}>Settings & privacy</Text>
+            <Text style={styles.TextHighlight}>{t('settings&Privacy')}</Text>
           )}
 
           <View style={styles.Icon}>
@@ -121,23 +124,23 @@ const Expanding=({})=> {
             style={styles.collapsedButton}
             onPress={Onpress}>
             <FAIcon style={styles.SubIcon} name="user-circle" />
-            <Text style={styles.CollapsedText}>Settings</Text>
+            <Text style={styles.CollapsedText}>{t('settings')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
             <MIcon style={styles.SubIcon} name="perm-device-info" />
-            <Text style={styles.CollapsedText}>Device requests</Text>
+            <Text style={styles.CollapsedText}>{t('deviceRequests')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
             <MIcon name="photo-camera-back" style={styles.SubIcon} />
-            <Text style={styles.CollapsedText}>Recent ad activity</Text>
+            <Text style={styles.CollapsedText}>{t('recentAdActivity')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
             <AIcon name="wifi" style={styles.SubIcon} />
-            <Text style={styles.CollapsedText}>Find Wi-Fi</Text>
+            <Text style={styles.CollapsedText}>{t('findWifi')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.collapsedButton}>
             <MIcon name="payment" style={styles.SubIcon} />
-            <Text style={styles.CollapsedText}>Orders and payments</Text>
+            <Text style={styles.CollapsedText}>{t('ordersAndPayments')}</Text>
           </TouchableOpacity>
         </View>
       </Collapsible>

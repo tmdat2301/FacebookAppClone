@@ -14,6 +14,7 @@ import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import EIcon from 'react-native-vector-icons/Entypo';
 import OIcon from 'react-native-vector-icons/Octicons';
+import {useTranslation} from 'react-i18next';
 
 const styles = StyleSheet.create({
   Container: {
@@ -90,7 +91,8 @@ const styles = StyleSheet.create({
   SubHeadTextSmall: {
     color: '#646466',
     fontSize: 14,
-    marginRight: 8,
+    marginRight: 18,
+    
   },
   TextBlue: {
     marginTop: 20,
@@ -115,9 +117,9 @@ const styles = StyleSheet.create({
     height: 0.7,
     backgroundColor: '#CCC',
   },
-  SectionDevider:{
-   width:'100%',
-   height: 0.7,
+  SectionDevider: {
+    width: '100%',
+    height: 0.7,
     backgroundColor: '#CCC',
   },
   SecondSubHeadView: {
@@ -161,6 +163,8 @@ const styles = StyleSheet.create({
 });
 
 const SettingDetailScreen = ({navigation}) => {
+  const {t, i18n} = useTranslation();
+
   return (
     <>
       <View style={styles.Container}>
@@ -168,7 +172,7 @@ const SettingDetailScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <FIcon name="angle-left" style={styles.Icon} />
           </TouchableOpacity>
-          <Text style={styles.HeadText}>Settings & privacy</Text>
+          <Text style={styles.HeadText}>{t('settings&Privacy')}</Text>
           <TouchableOpacity>
             <FIcon name="search" style={styles.Icon} />
           </TouchableOpacity>
@@ -179,22 +183,21 @@ const SettingDetailScreen = ({navigation}) => {
             <View style={styles.HeadTextContainer}>
               <View style={styles.MetaRow}>
                 <FAIcon name="infinity" style={styles.MetaIcon} />
-                <Text style={styles.SubHeadText}>Meta</Text>
+                <Text style={styles.SubHeadText}>{t('meta')}</Text>
               </View>
 
-              <Text style={styles.SubHeadText}>Accounts Center</Text>
-              <Text style={styles.SubHeadTextSmall}>
-                Manage your connected experiences and account settings across
-                Meta technologies
-              </Text>
+              <Text style={styles.SubHeadText}>{t('accountsCenter')}</Text>
+              <Text style={styles.SubHeadTextSmall}>{t('myceaasamt')}</Text>
               <TouchableOpacity style={styles.MetaRow}>
                 <MCIcon name="account-details" style={styles.SubIcon} />
-                <Text style={styles.SubHeadTextSmall}>Personal details</Text>
+                <Text style={styles.SubHeadTextSmall}>
+                  {t('personalDetails')}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.MetaRow}>
                 <MCIcon name="shield-lock-outline" style={styles.SubIcon} />
                 <Text style={styles.SubHeadTextSmall}>
-                  Password and security
+                  {t('passwordAndSecurity')}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.MetaRow}>
@@ -202,19 +205,19 @@ const SettingDetailScreen = ({navigation}) => {
                   name="newspaper-variant-outline"
                   style={styles.SubIcon}
                 />
-                <Text style={styles.SubHeadTextSmall}>Ad Preferences</Text>
+                <Text style={styles.SubHeadTextSmall}>
+                  {t('adPreferences')}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity>
-                <Text style={styles.TextBlue}>See more in Accounts Center</Text>
+                <Text style={styles.TextBlue}>{t('smiac')}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <TouchableOpacity style={styles.SubHeadView}>
             <View style={styles.SecondSubHeadView}>
-              <Text style={styles.SubHeadText}>Privacy Checkup</Text>
-              <Text style={styles.SubHeadTextSmall}>
-                A guided review of your important privacy and security settings.
-              </Text>
+              <Text style={styles.SubHeadText}>{t('privacyCheckup')}</Text>
+              <Text style={styles.SubHeadTextSmall}>{t('agroyipass')}</Text>
             </View>
             <View style={styles.PrivacyIcon}>
               <MCIcon name="archive-lock" style={styles.PrivacyIcon} />
@@ -225,41 +228,39 @@ const SettingDetailScreen = ({navigation}) => {
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={styles.LargeText}>Preferences</Text>
-              <Text style={styles.SubHeadTextSmall}>
-                Customize your experience on Facebook.
-              </Text>
+              <Text style={styles.LargeText}>{t('preferences')}</Text>
+              <Text style={styles.SubHeadTextSmall}>{t('cyeof')}</Text>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <Icon name="ios-notifications" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Notifications</Text>
+                <Text style={styles.SubHeadText}>{t('notifications')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <EIcon name="pin" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Navigation bar</Text>
+                <Text style={styles.SubHeadText}>{t('navigationBar')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
-              onPress={()=>navigation.navigate('LanguageAndRegionScreen')}
-              style={styles.Row}>
+                onPress={() => navigation.navigate('LanguageAndRegionScreen')}
+                style={styles.Row}>
                 <Icon name="globe-sharp" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Language and region</Text>
+                <Text style={styles.SubHeadText}>{t('languageAndRegion')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="play-box-multiple" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Media</Text>
+                <Text style={styles.SubHeadText}>{t('media')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="clock-time-four" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Your Time on Facebook</Text>
+                <Text style={styles.SubHeadText}>{t('ytof')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <OIcon name="browser" style={styles.ResizeIcon} />
-                <Text style={styles.SubHeadText}>Browser</Text>
+                <Text style={styles.SubHeadText}>{t('browser')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <Icon name="moon" style={styles.ResizeIcon} />
-                <Text style={styles.SubHeadText}>Dark mode</Text>
+                <Text style={styles.SubHeadText}>{t('darkMode')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -268,20 +269,20 @@ const SettingDetailScreen = ({navigation}) => {
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={styles.LargeText}>Audience and visibility</Text>
+              <Text style={styles.LargeText}>{t('audienceAndVisibility')}</Text>
               <Text style={styles.SubHeadTextSmall}>
-                Control who can see your posts, stories and profile.
+                {t('cwcsypsap')}
               </Text>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <UserIcon name="user-circle-o" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Profile details</Text>
+                <Text style={styles.SubHeadText}>{t('profileDetails')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="contacts" style={styles.SubIcon} />
                 <Text style={styles.SubHeadText}>
-                  How people find and contact you
+                  {t('hpfacy')}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
@@ -289,27 +290,27 @@ const SettingDetailScreen = ({navigation}) => {
                   name="newspaper-variant-outline"
                   style={styles.SubIcon}
                 />
-                <Text style={styles.SubHeadText}>Posts</Text>
+                <Text style={styles.SubHeadText}>{t('posts')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MIcon name="photo-library" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Stories</Text>
+                <Text style={styles.SubHeadText}>{t('stories')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="movie-open-play" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Reels</Text>
+                <Text style={styles.SubHeadText}>{t('reels')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <FAIcon name="tag" style={styles.ResizeIcon} />
-                <Text style={styles.SubHeadText}>Profile and Tagging</Text>
+                <Text style={styles.SubHeadText}>{t('profileAndTagging')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MIcon name="block" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Blocking</Text>
+                <Text style={styles.SubHeadText}>{t('blocking')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <FIcon name="radio-btn-active" style={styles.ResizeIcon} />
-                <Text style={styles.SubHeadText}>Active Status</Text>
+                <Text style={styles.SubHeadText}>{t('activeStatus')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -318,20 +319,19 @@ const SettingDetailScreen = ({navigation}) => {
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={styles.LargeText}>Your activity</Text>
+              <Text style={styles.LargeText}>{t('yourActivity')}</Text>
               <Text style={styles.SubHeadTextSmall}>
-                Access a log of your activity and control storage of your voice
-                searches.
+                {t('aaloyaacsoyvs')}
               </Text>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <MIcon name="local-activity" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Activity log</Text>
+                <Text style={styles.SubHeadText}>{t('activityLog')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="devices" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Device permissions</Text>
+                <Text style={styles.SubHeadText}>{t('devicePermissions')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -341,25 +341,25 @@ const SettingDetailScreen = ({navigation}) => {
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
               <Text style={styles.LargeText}>
-                Community Standards and Legal Policies
+                {t('csalp')}
               </Text>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <EIcon name="book" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Terms of service</Text>
+                <Text style={styles.SubHeadText}>{t('termsOfService')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="database-arrow-left" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Privacy Policy</Text>
+                <Text style={styles.SubHeadText}>{t('privacyPolicy')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="arrow-collapse-vertical" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Cookies Policy</Text>
+                <Text style={styles.SubHeadText}>{t('cookiesPolicy')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="check-decagram" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>Community Standards</Text>
+                <Text style={styles.SubHeadText}>{t('communityStandards')}</Text>
               </TouchableOpacity>
             </View>
           </View>

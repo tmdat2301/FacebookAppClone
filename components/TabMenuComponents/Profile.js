@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet,Image} from 'react-native';
+import {useTranslation} from 'react-i18next';
 
 const Avatar = ({source}) => {
   return <View style={styles.ContainerAvatar}>
@@ -8,12 +9,14 @@ const Avatar = ({source}) => {
 };
 
 const Profile = () => {
+  const {t, i18n} = useTranslation();
+
   return <View style={styles.Container}>
     <View style={styles.Row}>
         <Avatar source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxp8Vc5sWD8TyTlMV7ai9ZM57rtg2Wv3iaBBeriKI6&s'}}/>
         <View style={{paddingLeft:16}}>
-            <Text style={styles.User}>Trần Mạnh Đạt</Text>
-            <Text style={styles.SubText}>See your profile</Text>
+            <Text style={styles.User}>{t('userName')}</Text>
+            <Text style={styles.SubText}>{t('seeYourProfile')}</Text>
         </View>
     </View>
     <View style={styles.Separator}></View>

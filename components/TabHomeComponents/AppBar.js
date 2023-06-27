@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FIcon from 'react-native-vector-icons/Ionicons';
 import {StyleSheet, View, Text, TouchableOpacity, Modal} from 'react-native';
-import FnDeModal from '../FnDeModal';
+import { useTranslation } from 'react-i18next';
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   }
 });
 const AppBar = ({navigation}) => {
+  const {t}=useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -109,13 +110,13 @@ const AppBar = ({navigation}) => {
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Function is developing</Text>
+                <Text style={styles.modalText}>{t('funcDev')}</Text>
                 <View style={styles.SeparatorHorizontal}></View>
                 <View>
                   <TouchableOpacity
                   style={styles.OkButton}
                     onPress={() => setModalVisible(false)}>
-                    <Text style={styles.textStyle}>Ok</Text>
+                    <Text style={styles.textStyle}>{t('ok')}</Text>
                   </TouchableOpacity>
                 </View>
               </View>

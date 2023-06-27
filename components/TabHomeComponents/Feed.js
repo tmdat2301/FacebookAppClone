@@ -5,12 +5,13 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 import EIcon from 'react-native-vector-icons/Entypo';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Avatar from './Avatar';
+import { useTranslation } from 'react-i18next';
+
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
 });
 
 const Feed = ({feedData}) => {
+  const {t}=useTranslation();
     return (
       <>
           <View style={styles.Container}>
@@ -134,12 +136,12 @@ const Feed = ({feedData}) => {
                   </Text>
                 </View>
                 <View style={styles.Row}>
-                  <Text style={styles.TextCount}>
-                    {feedData.interaction[0].commentCount} Comments
+                  <Text style={[styles.TextCount,{marginRight:20}]}>
+                    {feedData.interaction[0].commentCount} {t('comments')}
                   </Text>
                   <Text> </Text>
                   <Text style={styles.TextCount}>
-                    {feedData.interaction[0].shareCount} Shares
+                    {feedData.interaction[0].shareCount} {t('shares')}
                   </Text>
                 </View>
               </View>
@@ -150,19 +152,19 @@ const Feed = ({feedData}) => {
                   <View style={styles.Icon}>
                     <AIcon name="like2" size={18} color="#424040" />
                   </View>
-                  <Text style={styles.Text}>Like</Text>
+                  <Text style={styles.Text}>{t('like')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Button}>
                   <View style={styles.Icon}>
                     <MIcon name="comment-outline" size={18} color="#424040" />
                   </View>
-                  <Text style={styles.Text}>Comment</Text>
+                  <Text style={styles.Text}>{t('comment')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Button}>
                   <View style={styles.Icon}>
                     <MIcon name="share-outline" size={20} color="#424040" />
                   </View>
-                  <Text style={styles.Text}>Share</Text>
+                  <Text style={styles.Text}>{t('share')}</Text>
                 </TouchableOpacity>
               </View>
             </View>

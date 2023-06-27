@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Avatar from './Avatar';
+import { useTranslation } from "react-i18next";
 const styles = StyleSheet.create({
   Container: {
     width: '100%',
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
   },
 });
 const ToolBar = () => {
+  const {t}=useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -93,7 +95,7 @@ const ToolBar = () => {
             }}
           />
           <TextInput
-            placeholder="what's on your mind?"
+            placeholder={t('woym')}
             style={styles.Input}></TextInput>
           <TouchableOpacity
             onPress={() => {
@@ -114,13 +116,13 @@ const ToolBar = () => {
           }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Function is developing</Text>
+              <Text style={styles.modalText}>{t('funcDev')}</Text>
               <View style={styles.SeparatorHorizontal}></View>
               <View>
                 <TouchableOpacity
                   style={styles.OkButton}
                   onPress={() => setModalVisible(false)}>
-                  <Text style={styles.textStyle}>Ok</Text>
+                  <Text style={styles.textStyle}>{t('ok')}</Text>
                 </TouchableOpacity>
               </View>
             </View>

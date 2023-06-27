@@ -1,13 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  View,
-  StyleSheet,
-  Modal,
-  Flatlist,
-} from 'react-native';
+import {TouchableOpacity, Text, View, StyleSheet, Modal} from 'react-native';
+import {useTranslation} from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import FIcon from 'react-native-vector-icons/Fontisto';
+// import { storeData,getData } from '../languages/i18n';
+
 
 const OPTIONS = [
   {
@@ -189,28 +186,58 @@ const styles = StyleSheet.create({
 });
 
 const ModalPicker = prop => {
-  const [language, setLanguage] = useState([]);
-  const [langName,setLangName]=useState('');
+
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('language', value);
+    } catch (e) {
+      // saving error
+    }
+  };
+
+  const {t, i18n} = useTranslation();
+
+  // const [language, setLanguage] = useState('');
+  const [langName, setLangName] = useState('');
+
   const onPressItem = option => {
     prop.changeModalVisibility(false);
     prop.setData(option);
   };
   const setSelectedIndex = id => {
+    console.log('id receive', id);
     OPTIONS.map((item, index) => {
       if (index == id) {
         OPTIONS[index].selected = true;
-        // onPressItem(OPTIONS[index].language)
-        setLangName(OPTIONS[index].language)
+        setLangName(OPTIONS[index].language);
       } else {
         OPTIONS[index].selected = false;
       }
     });
-    setLanguage([...OPTIONS]);
+    // setLanguage([...OPTIONS]);
+    // switch (language) {
+    //   case "English":
+    //     console.log("eng");
+    //     setLanguage("en")
+    //     break;
+    //   case "Vietnamese":
+    //     console.log('viet');
+    //     setLanguage("vi")
+    //     break;
+
+    //   default:
+    //     console.log('default');
+    //     setLanguage("vi");
+    // }
   };
   const option = OPTIONS.map((item, index) => {
     return (
       <View>
-        <TouchableOpacity onPress={() => setSelectedIndex(index)}>
+        <TouchableOpacity
+          onPress={() => {
+            console.log('index throw', index);
+            setSelectedIndex(index);
+          }}>
           {item.selected ? (
             <View
               style={{
@@ -218,9 +245,7 @@ const ModalPicker = prop => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <Text
-                key={index}
-                style={styles.TextLanguage}>
+              <Text key={index} style={styles.TextLanguage}>
                 {item.language}
               </Text>
               <FIcon
@@ -241,20 +266,28 @@ const ModalPicker = prop => {
       </View>
     );
   });
+  // getData("my-key");
   return (
+
     <View style={styles.modalView}>
       <View style={styles.Header}>
         <TouchableOpacity onPress={() => prop.changeModalVisibility(false)}>
           <FIcon name="angle-left" style={styles.Icon} />
         </TouchableOpacity>
-        <Text style={styles.HeadText}>Select language</Text>
+        <Text style={styles.HeadText}>{t('selectLanguage')}</Text>
       </View>
       <View style={styles.SectionDevider}></View>
       <Text style={styles.TitleLangText}>
-        You'll have the option to change app system into this language.
+        {t('yhtotcasitl')}
       </Text>
-      <TouchableOpacity onPress={()=>onPressItem(langName)} style={styles.SaveButton}>
-        <Text style={[styles.SubText, {paddingLeft: 9}]}>Save</Text>
+      <TouchableOpacity
+        onPress={() => {
+          onPressItem(langName);
+          i18n.changeLanguage(langName);
+          storeData(langName)
+        }}
+        style={styles.SaveButton}>
+        <Text style={[styles.SubText, {paddingLeft: 9}]}>{t('save')}</Text>
       </TouchableOpacity>
       <TouchableOpacity>{option}</TouchableOpacity>
     </View>
@@ -262,8 +295,9 @@ const ModalPicker = prop => {
 };
 
 const LangNreScreen = ({navigation}) => {
+  const {t, i18n} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [chooseData, setChooseData] = useState('...');
+  const [chooseData, setChooseData] = useState(i18n.language);
   const changeModalVisibility = bool => {
     setModalVisible(bool);
   };
@@ -277,38 +311,37 @@ const LangNreScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <FIcon name="angle-left" style={styles.Icon} />
           </TouchableOpacity>
-          <Text style={styles.HeadText}>Language and region</Text>
+          <Text style={styles.HeadText}>{t('languageAndRegion')}</Text>
         </View>
         <View style={styles.SectionDevider}></View>
         <View style={styles.TextContainer}>
           <TouchableOpacity onPress={() => changeModalVisibility(true)}>
             <Text style={styles.Text}>
-              Language for buttons, titles and other text from Facebook
+              {t('lfbtaotff')}
             </Text>
             <Text style={styles.SubText}>{chooseData}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.Text}>
-              Language you'd like to have posts translated into
+              {t('lylthpti')}
             </Text>
-            <Text style={styles.SubText}>English</Text>
+            <Text style={styles.SubText}>{t('en')}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.Text}>
-              Languages you don't want to be offered translations for
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.Text}>
-              languages you don't want automatically translated
+              {t('lydwtbotf')}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.Text}>
-              A feature that lets you post multiple language versions of a
-              status
+              {t('lydwat')}
             </Text>
-            <Text style={styles.SubText}>Turned off</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.Text}>
+              {t('aftlypmlvoas')}
+            </Text>
+            <Text style={styles.SubText}>{t('turnedOff')}</Text>
           </TouchableOpacity>
         </View>
       </View>
