@@ -11,7 +11,6 @@ import LoginScreen from '../LoginScreen';
 import SettingDetailScreen from '../SettingDetailScreen';
 import Expanding from '../../components/TabMenuComponents/Expanding';
 import LangNreScreen from '../LangNreScreen';
-
 const Stack=createNativeStackNavigator();
 // const AppNavigation=()=>{
 //   const {userInfo, splashLoading} = useContext(AuthContext);
@@ -125,6 +124,7 @@ const PageLogedIn =()=>{
 }
 
 const AppNavigation =()=>{
+
   return(
     <Stack.Navigator initialRouteName="Login" screenOptions={{
       headerShown: false,

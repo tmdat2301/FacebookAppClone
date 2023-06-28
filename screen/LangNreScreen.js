@@ -19,36 +19,11 @@ const OPTIONS = [
   },
   {
     id: 3,
-    language: 'Spanish',
-    selected: false,
-  },
-  {
-    id: 4,
     language: 'Chinese',
     selected: false,
   },
   {
-    id: 5,
-    language: 'Korean',
-    selected: false,
-  },
-  {
-    id: 6,
-    language: 'Dutch',
-    selected: false,
-  },
-  {
-    id: 7,
-    language: 'German',
-    selected: false,
-  },
-  {
-    id: 8,
-    language: 'Japanese',
-    selected: false,
-  },
-  {
-    id: 9,
+    id: 4,
     language: 'Vietnamese',
     selected: false,
   },
@@ -68,7 +43,6 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   Header: {
-    // position:'relative',
     flexDirection: 'row',
     height: 56,
     width: '100%',

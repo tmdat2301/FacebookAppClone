@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -17,7 +17,7 @@ import Story from '../../components/TabHomeComponents/Story.js';
 import Feed from '../../components/TabHomeComponents/Feed.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useTranslation} from 'react-i18next';
-
+import {ThemeContext} from '../../ThemeContext';
 
 const WIDTH = Dimensions.get('screen').width;
 const HEIGHT = Dimensions.get('screen').height;
@@ -166,27 +166,25 @@ const RenderHomeScreen = ({item}) => {
 
 const TabHome = ({navigation}) => {
   const {t, i18n} = useTranslation();
+  const context = useContext(ThemeContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [refreshControl, setRefreshControl] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     getData();
-  },[])
+  }, []);
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('language');
       if (value !== null) {
-          i18n.changeLanguage(value);
+        i18n.changeLanguage(value);
       }
     } catch (e) {
       // error reading value
     }
   };
-  
-  
-
 
   const newDataLoadMore = {
     user: [
@@ -234,11 +232,13 @@ const TabHome = ({navigation}) => {
   return (
     <>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-      <SafeAreaView style={styles.container}>
-        {/* <ScrollView
-          
-          > */}
-
+      <SafeAreaView
+        style={[
+          styles.container,
+          context.theme === 'light'
+            ? {backgroundColor: '#F2F2F2'}
+            : {backgroundColor: '#232527'},
+        ]}>
         <FlatList
           data={data}
           renderItem={RenderHomeScreen}
@@ -277,13 +277,13 @@ const TabHome = ({navigation}) => {
           initialNumToRender={1}
           onEndReachedThreshold={0}
         />
-        {/* </ScrollView> */}
       </SafeAreaView>
     </>
   );
 };
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#232527',
     flex: 1,
   },
 

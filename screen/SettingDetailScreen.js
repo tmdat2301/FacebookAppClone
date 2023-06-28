@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState,useMemo} from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   StyleSheet,
   ScrollView,
+  Modal,
 } from 'react-native';
 import FIcon from 'react-native-vector-icons/Fontisto';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
@@ -14,6 +15,7 @@ import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import EIcon from 'react-native-vector-icons/Entypo';
 import OIcon from 'react-native-vector-icons/Octicons';
+import RadioGroup from 'react-native-radio-buttons-group'
 import {useTranslation} from 'react-i18next';
 
 const styles = StyleSheet.create({
@@ -92,7 +94,6 @@ const styles = StyleSheet.create({
     color: '#646466',
     fontSize: 14,
     marginRight: 18,
-    
   },
   TextBlue: {
     marginTop: 20,
@@ -160,10 +161,103 @@ const styles = StyleSheet.create({
     marginRight: 12,
     marginLeft: 2,
   },
+  modalView: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    shadowColor: '#000',
+    borderColor: '#D0D0D0',
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowOffset: {
+      height: -10,
+      width: 0,
+    },
+    elevation: 100,
+  },
+  HeaderDM: {
+    flexDirection: 'row',
+    height: 56,
+    width: '100%',
+    backgroundColor: '#fff',
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 16,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  HeadTextDM: {
+    width: '85%',
+    height: '100%',
+    fontSize: 18,
+    color: '#000',
+    fontWeight: 600,
+    textAlign: 'center',
+    position: 'relative',
+  },
 });
 
 const SettingDetailScreen = ({navigation}) => {
   const {t, i18n} = useTranslation();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const ModalView=()=>{
+    const radioButtons = useMemo(() => ([
+      {
+          id: '1',
+          label: t('on'),
+          value: 'option1',
+          color:'blue',
+          borderColor:'#ccc',
+          labelStyle:{
+            color:'black',
+            fontWeight:500,
+            fontSize:16
+          }
+      },
+      {
+          id: '2',
+          label: t('off'),
+          value: 'option2',
+          color:'blue',
+          borderColor:'#ccc',
+
+          labelStyle:{
+            color:'black',
+            fontWeight:500,
+            fontSize:16
+          }
+      },
+      {
+          id: '3',
+          label: t('system'),
+          value: 'option3',
+          color:'blue',
+          borderColor:'#ccc',
+
+          labelStyle:{
+            color:'black',
+            fontWeight:500,
+            fontSize:16
+          }
+      }
+  ]), []);
+
+  const [selectedId, setSelectedId] = useState();
+
+  return (
+      <RadioGroup 
+          radioButtons={radioButtons} 
+          onPress={setSelectedId}
+          selectedId={selectedId}
+          containerStyle={{alignItems:'flex-start'}}
+      />
+  );
+  }
 
   return (
     <>
@@ -258,7 +352,9 @@ const SettingDetailScreen = ({navigation}) => {
                 <OIcon name="browser" style={styles.ResizeIcon} />
                 <Text style={styles.SubHeadText}>{t('browser')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.Row}>
+              <TouchableOpacity
+                onPress={() => setModalVisible(true)}
+                style={styles.Row}>
                 <Icon name="moon" style={styles.ResizeIcon} />
                 <Text style={styles.SubHeadText}>{t('darkMode')}</Text>
               </TouchableOpacity>
@@ -270,9 +366,7 @@ const SettingDetailScreen = ({navigation}) => {
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
               <Text style={styles.LargeText}>{t('audienceAndVisibility')}</Text>
-              <Text style={styles.SubHeadTextSmall}>
-                {t('cwcsypsap')}
-              </Text>
+              <Text style={styles.SubHeadTextSmall}>{t('cwcsypsap')}</Text>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
@@ -281,9 +375,7 @@ const SettingDetailScreen = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="contacts" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>
-                  {t('hpfacy')}
-                </Text>
+                <Text style={styles.SubHeadText}>{t('hpfacy')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon
@@ -320,9 +412,7 @@ const SettingDetailScreen = ({navigation}) => {
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
               <Text style={styles.LargeText}>{t('yourActivity')}</Text>
-              <Text style={styles.SubHeadTextSmall}>
-                {t('aaloyaacsoyvs')}
-              </Text>
+              <Text style={styles.SubHeadTextSmall}>{t('aaloyaacsoyvs')}</Text>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
@@ -340,9 +430,7 @@ const SettingDetailScreen = ({navigation}) => {
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={styles.LargeText}>
-                {t('csalp')}
-              </Text>
+              <Text style={styles.LargeText}>{t('csalp')}</Text>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
@@ -359,9 +447,33 @@ const SettingDetailScreen = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="check-decagram" style={styles.SubIcon} />
-                <Text style={styles.SubHeadText}>{t('communityStandards')}</Text>
+                <Text style={styles.SubHeadText}>
+                  {t('communityStandards')}
+                </Text>
               </TouchableOpacity>
             </View>
+          </View>
+
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(false);
+              }}>
+              <View style={styles.modalView}>
+                <View style={styles.HeaderDM}>
+                  <TouchableOpacity onPress={() => setModalVisible(false)}>
+                    <FIcon name="angle-left" style={styles.Icon} />
+                  </TouchableOpacity>
+                  <Text style={styles.HeadTextDM}>{t('DarkMode')}</Text>
+                </View>
+                <View style={styles.SectionDevider}></View>
+                <ModalView/>
+                <Text style={{fontSize:16,marginLeft:16}}>{t('subSystem')}</Text>
+              </View>
+            </Modal>
           </View>
         </ScrollView>
       </View>

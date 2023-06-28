@@ -11,6 +11,7 @@
     "postinstall": "npx typesync"
   },
   "dependencies": {
+    "@eva-design/eva": "^2.2.0",
     "@expo/vector-icons": "^13.0.0",
     "@raarts/react-native-extended-stylesheet": "^0.12.2",
     "@react-native-async-storage/async-storage": "^1.18.2",
@@ -34,17 +35,22 @@
     "react-i18next": "^13.0.1",
     "react-native": "0.71.8",
     "react-native-collapsible": "^1.6.1",
+    "react-native-event-listeners": "^1.0.7",
     "react-native-extended-stylesheet": "^0.12.0",
     "react-native-gesture-handler": "^2.12.0",
     "react-native-linear-gradient": "^2.7.1",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-localization": "^2.3.1",
     "react-native-pager-view": "^6.2.0",
+    "react-native-radio-buttons-group": "^3.0.2",
     "react-native-reanimated": "^3.3.0",
     "react-native-safe-area-context": "^4.5.3",
     "react-native-screens": "^3.21.0",
     "react-native-tab-view": "^3.5.1",
+    "react-native-ui-kitten": "^4.4.1",
     "react-native-vector-icons": "^9.2.0",
+    "react-redux": "^8.1.1",
+    "redux": "^4.2.1",
     "styled-components": "^5.3.11"
   },
   "devDependencies": {
