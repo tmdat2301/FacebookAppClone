@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
-
+import {ThemeContext} from '../../ThemeContext';
 let topData = [
   {
     id: '1',
@@ -25,47 +25,58 @@ let topData = [
 ];
 
 const TabWatch = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData(topData);
-    console.log('effect is called');
-  }, []);
+  const context = useContext(ThemeContext);
+  // const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   setData(topData);
+  //   console.log('effect is called');
+  // }, []);
 
-  const setSelectedIndex = id => {
-    topData.map((item, index) => {
-      if (index == id) {
-        topData[index].selected = true;
-      } else {
-        topData[index].selected = false;
-      }
-    });
-    setData([...topData]);
-  };
+  // const setSelectedIndex = id => {
+  //   topData.map((item, index) => {
+  //     if (index == id) {
+  //       topData[index].selected = true;
+  //     } else {
+  //       topData[index].selected = false;
+  //     }
+  //   });
+  //   setData([...topData]);
+  // };
 
-  const renderItem = ({item, index}) => {
-    console.log(item);
-    console.log('------------------------');
-    return (
-      <>
-        <TouchableOpacity
-          onPress={() => setSelectedIndex(index)}
-          style={[
-            item.selected ? styles.greenbg : styles.whitebg,
-            styles.storeInformationView,
-          ]}>
-          <Text style={[item.selected ? styles.whitetext : styles.name]}>
-            {item.Name}
-          </Text>
-        </TouchableOpacity>
-      </>
-    );
-  };
+  // const renderItem = ({item, index}) => {
+  //   console.log(item);
+  //   console.log('------------------------');
+  //   return (
+  //     <>
+  //       <TouchableOpacity
+  //         onPress={() => setSelectedIndex(index)}
+  //         style={[
+  //           item.selected ? styles.greenbg : styles.whitebg,
+  //           styles.storeInformationView,
+  //         ]}>
+  //         <Text style={[item.selected ? styles.whitetext : styles.name]}>
+  //           {item.Name}
+  //         </Text>
+  //       </TouchableOpacity>
+  //     </>
+  //   );
+  // };
 
-  return <FlatList data={data} renderItem={renderItem} />;
+  // return <FlatList data={data} renderItem={renderItem} />;
+  return (
+    <View
+      style={[
+        styles.Container,
+        context.theme === 'light' ? {} : {backgroundColor: '#232527'},
+      ]}></View>
+  );
 };
 
 export default TabWatch;
 const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+  },
   greenbg: {
     backgroundColor: 'green',
   },

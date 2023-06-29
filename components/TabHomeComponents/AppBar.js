@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FIcon from 'react-native-vector-icons/Ionicons';
 import {StyleSheet, View, Text, TouchableOpacity, Modal} from 'react-native';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {ThemeContext} from '../../ThemeContext';
+
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 21,
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 16,
@@ -75,12 +77,13 @@ const styles = StyleSheet.create({
     height: 0.7,
     backgroundColor: '#D0D0D0',
   },
-  OkButton:{
-    width:100,
-  }
+  OkButton: {
+    width: 100,
+  },
 });
 const AppBar = ({navigation}) => {
-  const {t}=useTranslation();
+  const context = useContext(ThemeContext);
+  const {t} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -88,41 +91,66 @@ const AppBar = ({navigation}) => {
       <View style={styles.Container}>
         <Text style={styles.Text}>facebook</Text>
         <View style={styles.Row}>
-          <TouchableOpacity style={styles.Button}>
-            <FIcon name="search" size={24} color="black" />
+          <TouchableOpacity
+            style={[
+              styles.Button,
+              context.theme === 'light'
+                ? {backgroundColor: '#ddd'}
+                : {backgroundColor: '#4E4F50'},
+            ]}>
+            <FIcon
+              name="search"
+              size={24}
+              color={context.theme === 'dark' ? '#fff' : '#2E2E2E'}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               setModalVisible(true);
             }}
-            style={styles.Button}>
-            <MCIcon name="facebook-messenger" size={24} color="black" />
+            style={[
+              styles.Button,
+              context.theme === 'light'
+                ? {backgroundColor: '#ddd'}
+                : {backgroundColor: '#4E4F50'},
+            ]}>
+            <MCIcon
+              name="facebook-messenger"
+              size={24}
+              color={context.theme === 'dark' ? '#fff' : '#2E2E2E'}
+            />
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(!modalVisible);
-            }}>
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>{t('funcDev')}</Text>
-                <View style={styles.SeparatorHorizontal}></View>
-                <View>
-                  <TouchableOpacity
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View
+              style={[
+                styles.modalView,
+                context.theme === 'light'
+                  ? {backgroundColor: '#fff'}
+                  : {backgroundColor: '#232527',borderColor:'#232527'},
+              ]}>
+              <Text style={styles.modalText}>{t('funcDev')}</Text>
+              <View style={styles.SeparatorHorizontal}></View>
+              <View>
+                <TouchableOpacity
                   style={styles.OkButton}
-                    onPress={() => setModalVisible(false)}>
-                    <Text style={styles.textStyle}>{t('ok')}</Text>
-                  </TouchableOpacity>
-                </View>
+                  onPress={() => setModalVisible(false)}>
+                  <Text style={styles.textStyle}>{t('ok')}</Text>
+                </TouchableOpacity>
               </View>
             </View>
-          </Modal>
-        </View>
+          </View>
+        </Modal>
+      </View>
     </>
   );
 };

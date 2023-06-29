@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import Avatar from './Avatar';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {ThemeContext} from '../../ThemeContext';
 
 const styles = StyleSheet.create({
   Container: {
@@ -142,12 +143,12 @@ const FakeStoryData = [
 ];
 
 const RenderStory = () => {
+  const context = useContext(ThemeContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState([]);
   return FakeStoryData.map(data => {
     return (
       <>
-        
         <TouchableOpacity
           onPress={() => {
             setModalData(data), setModalVisible(true);
@@ -173,7 +174,13 @@ const RenderStory = () => {
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
+            <View
+              style={[
+                styles.modalView,
+                context.theme === 'light'
+                  ? {backgroundColor: '#F2F2F2'}
+                  : {backgroundColor: '#232527'},
+              ]}>
               <Image
                 style={styles.StoryDetail}
                 source={{
@@ -183,7 +190,7 @@ const RenderStory = () => {
               <TouchableOpacity
                 style={styles.closeStory}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <AIcon name="close" size={25} color="#000" />
+                <AIcon name="close" size={25} color={context.theme==='light'?'black':'white'} />
               </TouchableOpacity>
             </View>
           </View>
@@ -194,7 +201,8 @@ const RenderStory = () => {
 };
 
 const Story = () => {
-  const {t}=useTranslation();
+  const context = useContext(ThemeContext);
+  const {t} = useTranslation();
   return (
     <>
       <View style={styles.Container}>
@@ -221,7 +229,13 @@ const Story = () => {
           <RenderStory />
         </ScrollView>
       </View>
-      <View style={styles.BottomDivider}></View>
+      <View
+        style={[
+          styles.BottomDivider,
+          context.theme === 'light'
+            ? {backgroundColor: '#D0D0D0'}
+            : {backgroundColor: 'black'},
+        ]}></View>
     </>
   );
 };

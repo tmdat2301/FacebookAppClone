@@ -1,4 +1,4 @@
-import React, {useState,useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import {
   View,
   Text,
@@ -15,10 +15,12 @@ import MenuBar from '../../components/TabMenuComponents/MenuBar';
 import Profile from '../../components/TabMenuComponents/Profile';
 import Shortcut from '../../components/TabMenuComponents/Shortcut';
 import Expanding from '../../components/TabMenuComponents/Expanding';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import {ThemeContext} from '../../ThemeContext';
 export default function TabMenu({}) {
-  const {t}=useTranslation();
+  const context = useContext(ThemeContext);
+  const {t} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const scrollViewRef = useRef();
 
@@ -30,25 +32,40 @@ export default function TabMenu({}) {
   };
   return (
     <>
-      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+      <StatusBar
+        backgroundColor={context.theme === 'light' ? '#fff' : '#232527'}
+        barStyle="dark-content"
+      />
 
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          context.theme === 'light' ? {} : {backgroundColor: '#232527'},
+        ]}>
         <ScrollView
           ref={scrollViewRef}
           onContentSizeChange={() =>
             scrollViewRef.current.scrollToEnd({animated: false})
-          }
-          >
+          }>
           <MenuBar />
           <Profile />
           <Shortcut />
           <Expanding />
           <TouchableOpacity
-            style={styles.LogoutButton}
+            style={[
+              styles.LogoutButton,
+              context.theme === 'light' ? {} : {backgroundColor: '#484848'},
+            ]}
             onPress={() => {
               setModalVisible(true);
             }}>
-            <Text style={styles.TextButton}>{t('logout')}</Text>
+            <Text
+              style={[
+                styles.TextButton,
+                context.theme === 'light' ? {} : {color: 'white'},
+              ]}>
+              {t('logout')}
+            </Text>
           </TouchableOpacity>
           <View style={styles.ViewEmpty}></View>
         </ScrollView>
@@ -61,8 +78,20 @@ export default function TabMenu({}) {
               setModalVisible(!modalVisible);
             }}>
             <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>{t("logoutConfirm")}</Text>
+              <View
+                style={[
+                  styles.modalView,
+                  context.theme === 'light'
+                    ? {}
+                    : {backgroundColor: '#232527', borderColor: '#232527'},
+                ]}>
+                <Text
+                  style={[
+                    styles.modalText,
+                    context.theme === 'light' ? {} : {color: 'white'},
+                  ]}>
+                  {t('logoutConfirm')}
+                </Text>
                 <View style={styles.SeparatorHorizontal}></View>
                 <View style={styles.ButtonConfirmation}>
                   <TouchableOpacity
@@ -91,8 +120,6 @@ export default function TabMenu({}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //  backgroundColor:'#ccc',
-    //  opacity:0.7
   },
   Row: {
     flexDirection: 'row',

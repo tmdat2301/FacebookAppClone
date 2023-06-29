@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Avatar from './Avatar';
-import { useTranslation } from "react-i18next";
+import {useTranslation} from 'react-i18next';
+import {ThemeContext} from '../../ThemeContext';
+
 const styles = StyleSheet.create({
   Container: {
     width: '100%',
@@ -82,7 +84,8 @@ const styles = StyleSheet.create({
   },
 });
 const ToolBar = () => {
-  const {t}=useTranslation();
+  const context = useContext(ThemeContext);
+  const {t} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -96,7 +99,11 @@ const ToolBar = () => {
           />
           <TextInput
             placeholder={t('woym')}
-            style={styles.Input}></TextInput>
+            placeholderTextColor={context.theme === 'light' ? 'black' : 'white'}
+            style={[
+              styles.Input,
+              context.theme === 'light' ? {color: 'black'} : {color: 'white'},
+            ]}></TextInput>
           <TouchableOpacity
             onPress={() => {
               setModalVisible(true);
@@ -104,7 +111,13 @@ const ToolBar = () => {
             <MIcon name="photo-library" size={30} color="#4CAF50" />
           </TouchableOpacity>
         </View>
-        <View style={styles.Divider}></View>
+        <View
+          style={[
+            styles.Divider,
+            context.theme === 'light'
+              ? {backgroundColor: '#D0D0D0'}
+              : {backgroundColor: 'black'},
+          ]}></View>
       </View>
       <View style={styles.centeredView}>
         <Modal
@@ -115,7 +128,13 @@ const ToolBar = () => {
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
+            <View
+              style={[
+                styles.modalView,
+                context.theme === 'light'
+                  ? {backgroundColor: '#fff'}
+                  : {backgroundColor: '#232527', borderColor: '#232527'},
+              ]}>
               <Text style={styles.modalText}>{t('funcDev')}</Text>
               <View style={styles.SeparatorHorizontal}></View>
               <View>

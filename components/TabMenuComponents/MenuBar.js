@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
-
+import {useNavigation} from '@react-navigation/native';
+import {ThemeContext} from '../../ThemeContext';
 
 const styles = StyleSheet.create({
   Container: {
@@ -35,17 +35,27 @@ const styles = StyleSheet.create({
   },
 });
 const MenuBar = () => {
+  const context = useContext(ThemeContext);
   const navigation = useNavigation();
 
   return (
     <View style={styles.Container}>
-      <Text style={styles.Text}>Menu</Text>
+      <Text style={[styles.Text,context.theme==='light'?{}:{color:'white'}]}>Menu</Text>
       <View style={styles.Row}>
-        <TouchableOpacity style={styles.Button} onPress={()=>navigation.navigate('SettingDetailScreen')}>
-            <Icon name='settings-sharp' size={24} color="black"/>
+        <TouchableOpacity
+          style={[
+            styles.Button,
+            context.theme === 'light' ? {backgroundColor:'#ddd'} : {backgroundColor: '#4E4F50'},
+          ]}
+          onPress={() => navigation.navigate('SettingDetailScreen')}>
+          <Icon name="settings-sharp" size={24} color={context.theme==='light'?'black':'white'} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}>
-            <Icon name='search' size={24} color="black"/>
+        <TouchableOpacity
+          style={[
+            styles.Button,
+            context.theme === 'light' ? {backgroundColor:'#ddd'} : {backgroundColor: '#4E4F50'},
+          ]}>
+          <Icon name="search" size={24} color={context.theme==='light'?'black':'white'} />
         </TouchableOpacity>
       </View>
     </View>

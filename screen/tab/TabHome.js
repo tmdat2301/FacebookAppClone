@@ -231,7 +231,7 @@ const TabHome = ({navigation}) => {
   const [data, setData] = useState(FakeNewfeedData);
   return (
     <>
-      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+      <StatusBar barStyle="dark-content" />
       <SafeAreaView
         style={[
           styles.container,

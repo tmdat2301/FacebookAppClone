@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'; 
 import TabHome from '../tab/TabHome'
@@ -12,6 +12,8 @@ import SettingDetailScreen from '../SettingDetailScreen';
 import Expanding from '../../components/TabMenuComponents/Expanding';
 import LangNreScreen from '../LangNreScreen';
 const Stack=createNativeStackNavigator();
+import {ThemeContext} from '../../ThemeContext';
+
 // const AppNavigation=()=>{
 //   const {userInfo, splashLoading} = useContext(AuthContext);
 //   const [token,setToken]=useState(localStorage.getItem("userToken")??null);
@@ -78,11 +80,15 @@ const Stack=createNativeStackNavigator();
 const Tab=createMaterialTopTabNavigator();
 
 const PageLogedIn =()=>{
+  const context = useContext(ThemeContext);
+
   return(
     <Tab.Navigator 
+    barStyle={{backgroundColor: '#694fad'}}
+    
     screenOptions={({ route }) => ({
       swipeEnabled: false,
-
+     
       tabBarIcon: ({ focused, size }) => {
         let iconName;
         let rn = route.name;
@@ -104,7 +110,7 @@ const PageLogedIn =()=>{
         }
         return <Ionicons name={iconName} size={24} color='#2196F3' />;
       },
-       tabBarStyle: { paddingTop: 10, height: 60,paddingBottom:10}
+       tabBarStyle: { paddingTop: 10, height: 60,paddingBottom:10,backgroundColor:context.theme==='light'?'#fff':'#232527'}
 
     })}
     tabBarOptions={{

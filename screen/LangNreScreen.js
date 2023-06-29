@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {TouchableOpacity, Text, View, StyleSheet, Modal} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FIcon from 'react-native-vector-icons/Fontisto';
+import {ThemeContext} from '../ThemeContext';
 // import { storeData,getData } from '../languages/i18n';
-
 
 const OPTIONS = [
   {
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
 });
 
 const ModalPicker = prop => {
-
-  const storeData = async (value) => {
+  const context = useContext(ThemeContext);
+  const storeData = async value => {
     try {
       await AsyncStorage.setItem('language', value);
     } catch (e) {
@@ -219,7 +219,7 @@ const ModalPicker = prop => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <Text key={index} style={styles.TextLanguage}>
+              <Text key={index} style={[styles.TextLanguage,context.theme==='light'?{}:{color:'#ccc'}]}>
                 {item.language}
               </Text>
               <FIcon
@@ -230,38 +230,39 @@ const ModalPicker = prop => {
               />
             </View>
           ) : (
-            <Text key={index} style={styles.TextLanguage}>
+            <Text key={index} style={[styles.TextLanguage,context.theme==='light'?{}:{color:'#ccc'}]}>
               {item.language}
             </Text>
           )}
         </TouchableOpacity>
 
-        <View style={styles.LanguageDevider}></View>
+        <View style={[styles.LanguageDevider,context.theme==='light'?{}:{backgroundColor:'#ccc',height:0.5}]}></View>
       </View>
     );
   });
   // getData("my-key");
   return (
-
-    <View style={styles.modalView}>
-      <View style={styles.Header}>
+    <View style={[styles.modalView,context.theme==='light'?{}:{backgroundColor:'#232527'}]}>
+      <View
+        style={[
+          styles.Header,
+          context.theme === 'light' ? {} : {backgroundColor: '#232527'},
+        ]}>
         <TouchableOpacity onPress={() => prop.changeModalVisibility(false)}>
-          <FIcon name="angle-left" style={styles.Icon} />
+          <FIcon name="angle-left" style={[styles.Icon,context.theme==='light'?{}:{color:'white'}]} />
         </TouchableOpacity>
-        <Text style={styles.HeadText}>{t('selectLanguage')}</Text>
+        <Text style={[styles.HeadText,context.theme==='light'?{}:{color:'white'}]}>{t('selectLanguage')}</Text>
       </View>
       <View style={styles.SectionDevider}></View>
-      <Text style={styles.TitleLangText}>
-        {t('yhtotcasitl')}
-      </Text>
+      <Text style={[styles.TitleLangText,context.theme==='light'?{}:{color:'#eee'}]}>{t('yhtotcasitl')}</Text>
       <TouchableOpacity
         onPress={() => {
           onPressItem(langName);
           i18n.changeLanguage(langName);
-          storeData(langName)
+          storeData(langName);
         }}
-        style={styles.SaveButton}>
-        <Text style={[styles.SubText, {paddingLeft: 9}]}>{t('save')}</Text>
+        style={[styles.SaveButton,context.theme==='light'?{}:{borderColor:'#ccc'}]}>
+        <Text style={[[styles.SubText,context.theme==='light'?{}:{color:'#ccc'}], {paddingLeft: 9}]}>{t('save')}</Text>
       </TouchableOpacity>
       <TouchableOpacity>{option}</TouchableOpacity>
     </View>
@@ -269,6 +270,7 @@ const ModalPicker = prop => {
 };
 
 const LangNreScreen = ({navigation}) => {
+  const context = useContext(ThemeContext);
   const {t, i18n} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [chooseData, setChooseData] = useState(i18n.language);
@@ -281,41 +283,41 @@ const LangNreScreen = ({navigation}) => {
   return (
     <View style={styles.ParentContainer}>
       <View style={styles.Container}>
-        <View style={styles.Header}>
+        <View
+          style={[
+            styles.Header,
+            context.theme === 'light' ? {} : {backgroundColor: '#232527'},
+          ]}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <FIcon name="angle-left" style={styles.Icon} />
+            <FIcon name="angle-left" style={[styles.Icon,context.theme==='light'?{}:{color:'white'}]} />
           </TouchableOpacity>
-          <Text style={styles.HeadText}>{t('languageAndRegion')}</Text>
+          <Text
+            style={[
+              styles.HeadText,
+              context.theme === 'light' ? {} : {color: 'white'},
+            ]}>
+            {t('languageAndRegion')}
+          </Text>
         </View>
-        <View style={styles.SectionDevider}></View>
-        <View style={styles.TextContainer}>
+        <View style={[styles.SectionDevider,context.theme==='light'?{}:{backgroundColor:'#aaa',height:0.5}]}></View>
+        <View style={[styles.TextContainer,context.theme==='light'?{}:{backgroundColor:'#232527'}]}>
           <TouchableOpacity onPress={() => changeModalVisibility(true)}>
-            <Text style={styles.Text}>
-              {t('lfbtaotff')}
-            </Text>
-            <Text style={styles.SubText}>{chooseData}</Text>
+            <Text style={[styles.Text,context.theme==='light'?{}:{color:'#eee'}]}>{t('lfbtaotff')}</Text>
+            <Text style={[styles.SubText,context.theme==='light'?{}:{color:'#aaa'}]}>{chooseData}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.Text}>
-              {t('lylthpti')}
-            </Text>
-            <Text style={styles.SubText}>{t('en')}</Text>
+            <Text style={[styles.Text,context.theme==='light'?{}:{color:'#eee'}]}>{t('lylthpti')}</Text>
+            <Text style={[styles.SubText,context.theme==='light'?{}:{color:'#aaa'}]}>{t('en')}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.Text}>
-              {t('lydwtbotf')}
-            </Text>
+            <Text style={[styles.Text,context.theme==='light'?{}:{color:'#eee'}]}>{t('lydwtbotf')}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.Text}>
-              {t('lydwat')}
-            </Text>
+            <Text style={[styles.Text,context.theme==='light'?{}:{color:'#eee'}]}>{t('lydwat')}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.Text}>
-              {t('aftlypmlvoas')}
-            </Text>
-            <Text style={styles.SubText}>{t('turnedOff')}</Text>
+            <Text style={[styles.Text,context.theme==='light'?{}:{color:'#eee'}]}>{t('aftlypmlvoas')}</Text>
+            <Text style={[styles.SubText,context.theme==='light'?{}:{color:'#aaa'}]}>{t('turnedOff')}</Text>
           </TouchableOpacity>
         </View>
       </View>
