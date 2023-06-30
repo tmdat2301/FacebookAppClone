@@ -1,9 +1,13 @@
 import React, {useState, useContext} from 'react';
-import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import FIcon from 'react-native-vector-icons/Ionicons';
 import {StyleSheet, View, Text, TouchableOpacity, Modal} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {ThemeContext} from '../../ThemeContext';
+import {AppButton, DevModal} from '../AppButton/AppButton';
+import {
+  AppIconMessenger,
+  AppIconSearch,
+  AppIconSetting,
+} from '../AppButton/AppIcon';
 
 const styles = StyleSheet.create({
   Container: {
@@ -91,19 +95,9 @@ const AppBar = ({navigation}) => {
       <View style={styles.Container}>
         <Text style={styles.Text}>facebook</Text>
         <View style={styles.Row}>
-          <TouchableOpacity
-            style={[
-              styles.Button,
-              context.theme === 'light'
-                ? {backgroundColor: '#ddd'}
-                : {backgroundColor: '#4E4F50'},
-            ]}>
-            <FIcon
-              name="search"
-              size={24}
-              color={context.theme === 'dark' ? '#fff' : '#2E2E2E'}
-            />
-          </TouchableOpacity>
+          <AppButton style={styles.Button}>
+            <AppIconSearch />
+          </AppButton>
           <TouchableOpacity
             onPress={() => {
               setModalVisible(true);
@@ -114,11 +108,7 @@ const AppBar = ({navigation}) => {
                 ? {backgroundColor: '#ddd'}
                 : {backgroundColor: '#4E4F50'},
             ]}>
-            <MCIcon
-              name="facebook-messenger"
-              size={24}
-              color={context.theme === 'dark' ? '#fff' : '#2E2E2E'}
-            />
+            <AppIconMessenger />
           </TouchableOpacity>
         </View>
       </View>
@@ -131,13 +121,7 @@ const AppBar = ({navigation}) => {
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
-            <View
-              style={[
-                styles.modalView,
-                context.theme === 'light'
-                  ? {backgroundColor: '#fff'}
-                  : {backgroundColor: '#232527',borderColor:'#232527'},
-              ]}>
+            <DevModal style={styles.modalView}>
               <Text style={styles.modalText}>{t('funcDev')}</Text>
               <View style={styles.SeparatorHorizontal}></View>
               <View>
@@ -147,7 +131,7 @@ const AppBar = ({navigation}) => {
                   <Text style={styles.textStyle}>{t('ok')}</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </DevModal>
           </View>
         </Modal>
       </View>

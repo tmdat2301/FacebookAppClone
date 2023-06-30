@@ -5,7 +5,6 @@ import FIcon from 'react-native-vector-icons/Fontisto';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import Collapsible from 'react-native-collapsible';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
-import SettingDetailScreen from '../../screen/SettingDetailScreen';
 import {useTranslation} from 'react-i18next';
 import {ThemeContext} from '../../ThemeContext';
 const styles = StyleSheet.create({
@@ -74,6 +73,9 @@ const styles = StyleSheet.create({
   },
 });
 import {useNavigation} from '@react-navigation/native';
+import {AppText, AppTextBold, AppTextShortcut} from '../AppText/AppText';
+import {IconExpandDown, IconExpandUp} from '../AppButton/AppIcon';
+import {SettingItem, ShortCutItem} from '../AppButton/AppButton';
 
 const Expanding = ({}) => {
   const {t, i18n} = useTranslation();
@@ -93,19 +95,9 @@ const Expanding = ({}) => {
       <TouchableOpacity>
         <View style={styles.BlockElement}>
           <AIcon name="questioncircle" size={26} color="#B1C9CF" />
-          <Text
-            style={[
-              styles.Text,
-              context.theme === 'light' ? {} : {color: 'white'},
-            ]}>
-            {t('help&Support')}
-          </Text>
+          <AppText style={styles.Text}>{t('help&Support')}</AppText>
           <View style={styles.Icon}>
-            <FAIcon
-              name="chevron-down"
-              size={14}
-              color={context.theme === 'light' ? 'black' : 'white'}
-            />
+            <IconExpandDown />
           </View>
         </View>
       </TouchableOpacity>
@@ -115,115 +107,50 @@ const Expanding = ({}) => {
         <View style={styles.BlockElement}>
           <FIcon name="player-settings" color="#B1C9CF" size={26} />
           {collapsed ? (
-            <Text
-              style={[
-                styles.Text,
-                context.theme === 'light' ? {} : {color: 'white'},
-              ]}>
-              {t('settings&Privacy')}
-            </Text>
+            <AppText style={styles.Text}>{t('settings&Privacy')}</AppText>
           ) : (
-            <Text
-              style={[
-                styles.TextHighlight,
-                context.theme === 'light'
-                  ? {}
-                  : {color: 'white', fontWeight: 'bold'},
-              ]}>
+            <AppTextBold style={styles.TextHighlight}>
               {t('settings&Privacy')}
-            </Text>
+            </AppTextBold>
           )}
 
           <View style={styles.Icon}>
-            {collapsed ? (
-              <FAIcon
-                name="chevron-down"
-                size={14}
-                color={context.theme === 'light' ? 'black' : 'white'}
-              />
-            ) : (
-              <FAIcon
-                name="chevron-up"
-                size={14}
-                color={context.theme === 'light' ? 'black' : 'white'}
-              />
-            )}
+            {collapsed ? <IconExpandDown /> : <IconExpandUp />}
           </View>
         </View>
       </TouchableOpacity>
       <Collapsible collapsed={collapsed}>
         <View>
-          <TouchableOpacity
-            style={[
-              styles.collapsedButton,
-              context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-            ]}
-            onPress={Onpress}>
+          <SettingItem style={styles.collapsedButton}>
             <FAIcon style={styles.SubIcon} name="user-circle" />
-            <Text
-              style={[
-                styles.CollapsedText,
-                context.theme === 'light' ? {} : {color: '#eee'},
-              ]}>
+            <AppTextShortcut style={styles.CollapsedText}>
               {t('settings')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.collapsedButton,
-              context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-            ]}>
+            </AppTextShortcut>
+          </SettingItem>
+          <ShortCutItem style={styles.collapsedButton}>
             <MIcon style={styles.SubIcon} name="perm-device-info" />
-            <Text
-              style={[
-                styles.CollapsedText,
-                context.theme === 'light' ? {} : {color: '#eee'},
-              ]}>
+            <AppTextShortcut style={styles.CollapsedText}>
               {t('deviceRequests')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.collapsedButton,
-              context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-            ]}>
+            </AppTextShortcut>
+          </ShortCutItem>
+          <ShortCutItem style={styles.collapsedButton}>
             <MIcon name="photo-camera-back" style={styles.SubIcon} />
-            <Text
-              style={[
-                styles.CollapsedText,
-                context.theme === 'light' ? {} : {color: '#eee'},
-              ]}>
+            <AppTextShortcut style={styles.CollapsedText}>
               {t('recentAdActivity')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.collapsedButton,
-              context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-            ]}>
+            </AppTextShortcut>
+          </ShortCutItem>
+          <ShortCutItem style={styles.collapsedButton}>
             <AIcon name="wifi" style={styles.SubIcon} />
-            <Text
-              style={[
-                styles.CollapsedText,
-                context.theme === 'light' ? {} : {color: '#eee'},
-              ]}>
+            <AppTextShortcut style={styles.CollapsedText}>
               {t('findWifi')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.collapsedButton,
-              context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-            ]}>
+            </AppTextShortcut>
+          </ShortCutItem>
+          <ShortCutItem style={styles.collapsedButton}>
             <MIcon name="payment" style={styles.SubIcon} />
-            <Text
-              style={[
-                styles.CollapsedText,
-                context.theme === 'light' ? {} : {color: '#eee'},
-              ]}>
+            <AppTextShortcut style={styles.CollapsedText}>
               {t('ordersAndPayments')}
-            </Text>
-          </TouchableOpacity>
+            </AppTextShortcut>
+          </ShortCutItem>
         </View>
       </Collapsible>
     </View>

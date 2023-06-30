@@ -11,12 +11,15 @@ import React, {useContext} from 'react';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import LinearGradient from 'react-native-linear-gradient';
 import MaskedView from '@react-native-community/masked-view';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import {useTranslation} from 'react-i18next';
 import {ThemeContext} from '../../ThemeContext';
+import {AppShortcutIcon} from '../AppButton/AppIcon';
+import {LongButton, Separator, ShortCutItem} from '../AppButton/AppButton';
+import {AppText, AppTextShortcut} from '../AppText/AppText';
+import {ShortCutCard} from '../AppButton/AppButton';
 
 const Data = [
   {
@@ -198,162 +201,117 @@ const RenderShortcutItem = () => {
   return (
     <>
       <View style={styles.ShortcutItemContainer}>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MCIcon name="heart" size={25} color="#ef473a" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('dating')}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+          </AppTextShortcut>
+        </ShortCutItem>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MIcon name="ondemand-video" size={25} color="#11998e" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('videosOnWatch')}
-          </Text>
-        </TouchableOpacity>
+          </AppTextShortcut>
+        </ShortCutItem>
       </View>
+
       <View style={styles.ShortcutItemContainer}>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MCIcon name="post-outline" size={25} color="#4286f4" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('feeds')}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+          </AppTextShortcut>
+        </ShortCutItem>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MIcon name="save" size={25} color="#f80759" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('saved')}
-          </Text>
-        </TouchableOpacity>
+          </AppTextShortcut>
+        </ShortCutItem>
       </View>
+
       <View style={styles.ShortcutItemContainer}>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <AIcon name="flag" size={25} color="#f12711" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('pages')}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+          </AppTextShortcut>
+        </ShortCutItem>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <FAIcon name="user-friends" size={22} color="#11998e" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('friends')}
-          </Text>
-        </TouchableOpacity>
+          </AppTextShortcut>
+        </ShortCutItem>
       </View>
-      <View>
-        <View style={styles.ShortcutItemContainer}>
-          <TouchableOpacity
-            style={[
-              styles.ShortcutItem,
-              context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-            ]}>
-            <View style={styles.Icon}>
-              <MCIcon name="account-group" size={26} color="#4286f4" />
-            </View>
-            <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
-              {t('groups')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.ShortcutItem,
-              context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-            ]}>
-            <View style={styles.Icon}>
-              <MCIcon name="fireplace-off" size={25} color="#11998e" />
-            </View>
-            <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
-              {t('marketplace')}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+
       <View style={styles.ShortcutItemContainer}>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
+            <MCIcon name="account-group" size={26} color="#4286f4" />
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
+            {t('groups')}
+          </AppTextShortcut>
+        </ShortCutItem>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
+            <MCIcon name="fireplace-off" size={25} color="#11998e" />
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
+            {t('marketplace')}
+          </AppTextShortcut>
+        </ShortCutItem>
+      </View>
+
+      <View style={styles.ShortcutItemContainer}>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MCIcon name="clock-check-outline" size={25} color="#4286f4" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('memories')}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+          </AppTextShortcut>
+        </ShortCutItem>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MIcon name="video-library" size={25} color="#f12711" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('reels')}
-          </Text>
-        </TouchableOpacity>
+          </AppTextShortcut>
+        </ShortCutItem>
       </View>
+
       <View style={styles.ShortcutItemContainer}>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MIcon name="event" size={25} color="#ef473a" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('events')}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.ShortcutItem,
-            context.theme === 'light' ? {} : {backgroundColor: '#323436'},
-          ]}>
-          <View style={styles.Icon}>
+          </AppTextShortcut>
+        </ShortCutItem>
+        <ShortCutItem style={styles.ShortcutItem}>
+          <AppShortcutIcon style={styles.Icon}>
             <MIcon name="videogame-asset" size={25} color="#4286f4" />
-          </View>
-          <Text style={[styles.TextCardItem,context.theme==='light'?{}:{color:'#eee'}]}>
+          </AppShortcutIcon>
+          <AppTextShortcut style={styles.TextCardItem}>
             {t('gaming')}
-          </Text>
-        </TouchableOpacity>
+          </AppTextShortcut>
+        </ShortCutItem>
       </View>
     </>
   );
@@ -370,11 +328,7 @@ const RenderShortcutCard = () => {
         </View>
 
         {data.type === 'messenger' ? (
-          <View
-            style={[
-              styles.LinearGradient,
-              context.theme === 'light' ? {} : {backgroundColor: '#999'},
-            ]}>
+          <ShortCutCard style={styles.LinearGradient}>
             <MaskedView
               style={{flex: 1, flexDirection: 'row'}}
               maskElement={
@@ -398,26 +352,18 @@ const RenderShortcutCard = () => {
                 style={{flex: 1}}
               />
             </MaskedView>
-          </View>
+          </ShortCutCard>
         ) : data.type === 'flag' ? (
-          <View
-            style={[
-              styles.TypeIcon,
-              context.theme === 'light' ? {} : {backgroundColor: '#999'},
-            ]}>
+          <ShortCutCard style={styles.TypeIcon}>
             <AIcon size={14} name="flag" color="#ef473a" />
-          </View>
+          </ShortCutCard>
         ) : (
-          <View
-            style={[
-              styles.TypeIcon,
-              context.theme === 'light' ? {} : {backgroundColor: '#999'},
-            ]}>
+          <ShortCutCard style={styles.TypeIcon}>
             <FAIcon size={10} name="user-friends" color="#3a86e9" />
-          </View>
+          </ShortCutCard>
         )}
 
-        <Text style={[styles.Subtext,context.theme==='light'?{}:{color:'#ccc'}]}>{data.name}</Text>
+        <AppTextShortcut style={styles.Subtext}>{data.name}</AppTextShortcut>
       </TouchableOpacity>
     );
   });
@@ -429,13 +375,7 @@ const Shortcut = () => {
 
   return (
     <View style={styles.Container}>
-      <Text
-        style={[
-          styles.Text,
-          context.theme === 'light' ? {} : {color: 'white'},
-        ]}>
-        {t('yourShortcuts')}
-      </Text>
+      <AppText style={styles.Text}>{t('yourShortcuts')}</AppText>
 
       <ScrollView
         horizontal
@@ -443,32 +383,12 @@ const Shortcut = () => {
         style={styles.CardContainer}>
         <RenderShortcutCard />
       </ScrollView>
-      <Text
-        style={[
-          styles.Texts,
-          context.theme === 'light' ? {} : {color: 'white'},
-        ]}>
-        {t('allShortcuts')}
-      </Text>
+      <AppText style={styles.Texts}>{t('allShortcuts')}</AppText>
       <RenderShortcutItem />
-      <TouchableOpacity
-        style={[
-          styles.Button,
-          context.theme === 'light' ? {} : {backgroundColor: '#484848'},
-        ]}>
-        <Text
-          style={[
-            styles.TextButton,
-            context.theme === 'light' ? {} : {color: 'white'},
-          ]}>
-          {t('seeMore')}
-        </Text>
-      </TouchableOpacity>
-      <View
-        style={[
-          styles.Separator,
-          context.theme === 'light' ? {} : {color: 'white'},
-        ]}></View>
+      <LongButton style={styles.Button}>
+        <AppText style={styles.TextButton}>{t('seeMore')}</AppText>
+      </LongButton>
+      <Separator style={styles.Separator}></Separator>
     </View>
   );
 };

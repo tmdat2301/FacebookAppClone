@@ -1,8 +1,9 @@
-import React, {useContext} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
-import {ThemeContext} from '../../ThemeContext';
+import React from 'react';
+import { View, StyleSheet} from 'react-native';
+import {AppText} from '../AppText/AppText';
+import { AppIconSearch } from '../AppButton/AppIcon';
+import { AppIconSetting } from '../AppButton/AppIcon';
+import {AppButton} from '../AppButton/AppButton';
 
 const styles = StyleSheet.create({
   Container: {
@@ -35,28 +36,17 @@ const styles = StyleSheet.create({
   },
 });
 const MenuBar = () => {
-  const context = useContext(ThemeContext);
-  const navigation = useNavigation();
 
   return (
     <View style={styles.Container}>
-      <Text style={[styles.Text,context.theme==='light'?{}:{color:'white'}]}>Menu</Text>
+      <AppText style={styles.Text}>Menu</AppText>
       <View style={styles.Row}>
-        <TouchableOpacity
-          style={[
-            styles.Button,
-            context.theme === 'light' ? {backgroundColor:'#ddd'} : {backgroundColor: '#4E4F50'},
-          ]}
-          onPress={() => navigation.navigate('SettingDetailScreen')}>
-          <Icon name="settings-sharp" size={24} color={context.theme==='light'?'black':'white'} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.Button,
-            context.theme === 'light' ? {backgroundColor:'#ddd'} : {backgroundColor: '#4E4F50'},
-          ]}>
-          <Icon name="search" size={24} color={context.theme==='light'?'black':'white'} />
-        </TouchableOpacity>
+         <AppButton style={styles.Button}>
+          <AppIconSetting/>
+         </AppButton>
+         <AppButton style={styles.Button}>
+          <AppIconSearch/>
+         </AppButton>
       </View>
     </View>
   );
