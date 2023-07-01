@@ -146,9 +146,11 @@ const RenderStory = () => {
   const context = useContext(ThemeContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState([]);
-  return FakeStoryData.map(data => {
+  const [index, setIndex] = useState();
+  return FakeStoryData.map((data, index) => {
+    
     return (
-      <>
+      <View key={index}> 
         <TouchableOpacity
           onPress={() => {
             setModalData(data), setModalVisible(true);
@@ -190,12 +192,16 @@ const RenderStory = () => {
               <TouchableOpacity
                 style={styles.closeStory}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <AIcon name="close" size={25} color={context.theme==='light'?'black':'white'} />
+                <AIcon
+                  name="close"
+                  size={25}
+                  color={context.theme === 'light' ? 'black' : 'white'}
+                />
               </TouchableOpacity>
             </View>
           </View>
         </Modal>
-      </>
+      </View>
     );
   });
 };
