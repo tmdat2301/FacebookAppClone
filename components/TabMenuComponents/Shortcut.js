@@ -320,9 +320,9 @@ const RenderShortcutItem = () => {
 const RenderShortcutCard = () => {
   const context = useContext(ThemeContext);
 
-  return Data.map(data => {
+  return Data.map((data,index) => {
     return (
-      <TouchableOpacity style={styles.Card}>
+      <TouchableOpacity key={index} style={styles.Card}>
         <View>
           <Image style={styles.Image} source={{uri: data.imageUrl}} />
         </View>
