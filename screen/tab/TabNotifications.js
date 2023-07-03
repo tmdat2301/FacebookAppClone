@@ -1,12 +1,38 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Text, View, StyleSheet, Button, Switch} from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 import {ThemeContext} from '../../ThemeContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TabNoti({navigation}) {
+    useEffect(() => {
+    storeMode(context.theme);
+    console.log('mode', context.theme);
+    // const aaa=getMode();
+    // console.log('aaa', aaa);
+  });
+  const storeMode = async value => {
+    try {
+      await AsyncStorage.setItem('mode', value);
+    } catch (e) {}
+  };
+
+  const getMode = async () => {
+    try {
+      const mode = await AsyncStorage.getItem('mode');
+      console.log('//////////////',mode);
+      if (mode ==='light'){
+        setIsEnabled(false)
+      }else setIsEnabled(true);
+    } catch (error) {}
+  };
+
+
   const context = useContext(ThemeContext);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [isEnabled, setIsEnabled] = useState(getMode);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+  };
   return (
     <View
       style={[
