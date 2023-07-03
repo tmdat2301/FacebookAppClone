@@ -24,6 +24,7 @@ const HEIGHT = Dimensions.get('screen').height;
 
 const FakeNewfeedData = [
   {
+    id: 1,
     user: [
       {
         name: 'Ngọc Linh',
@@ -50,6 +51,7 @@ const FakeNewfeedData = [
     ],
   },
   {
+    id: 2,
     user: [
       {
         name: 'Tùng Lâm',
@@ -76,6 +78,7 @@ const FakeNewfeedData = [
     ],
   },
   {
+    id: 3,
     user: [
       {
         name: 'Đặng Diệu Linh',
@@ -102,6 +105,7 @@ const FakeNewfeedData = [
     ],
   },
   {
+    id: 4,
     user: [
       {
         name: 'Văn Lâm',
@@ -127,6 +131,7 @@ const FakeNewfeedData = [
     ],
   },
   {
+    id: 5,
     user: [
       {
         name: 'Taylor Swift',
@@ -172,9 +177,18 @@ const TabHome = ({navigation}) => {
   const [refreshControl, setRefreshControl] = useState(false);
 
   useEffect(() => {
+    getMode();
     getData();
   }, []);
 
+  const getMode = async () => {
+    try {
+      const mode = await AsyncStorage.getItem('mode');
+      if (mode !== null) {
+        context.setTheme(mode);
+      }
+    } catch (error) {}
+  };
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('language');
