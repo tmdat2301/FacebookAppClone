@@ -53,4 +53,14 @@ const TextCCC = props => {
   );
 };
 
-export {AppText, AppTextShortcut, AppTextBold, TextAAA,TextCCC};
+const TextDDD = props => {
+  const context = useContext(ThemeContext);
+  const theme = context.theme;
+  return (
+    <Text style={[props?.style, theme === 'light' ? {} : {color: '#ddd'}]}>
+      {props?.children}
+    </Text>
+  );
+};
+
+export {AppText, AppTextShortcut, AppTextBold, TextAAA,TextCCC,TextDDD};

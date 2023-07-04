@@ -1,4 +1,4 @@
-import React, {useState,useMemo,useContext} from 'react';
+import React, {useState, useMemo, useContext} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -15,9 +15,21 @@ import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import EIcon from 'react-native-vector-icons/Entypo';
 import OIcon from 'react-native-vector-icons/Octicons';
-import RadioGroup from 'react-native-radio-buttons-group'
+import RadioGroup from 'react-native-radio-buttons-group';
 import {useTranslation} from 'react-i18next';
-import { ThemeContext } from '../ThemeContext';
+import {ThemeContext} from '../ThemeContext';
+import {
+  AppText,
+  AppTextShortcut,
+  TextAAA,
+  TextDDD,
+} from '../components/AppText/AppText';
+import {
+  ConAndRe,
+  HeadView,
+  ShortCutItem,
+} from '../components/AppButton/AppButton';
+import {IconBack, IconSearch} from '../components/AppButton/AppIcon';
 
 const styles = StyleSheet.create({
   Container: {
@@ -203,161 +215,188 @@ const styles = StyleSheet.create({
 });
 
 const SettingDetailScreen = ({navigation}) => {
-  const context=useContext(ThemeContext);
+  const context = useContext(ThemeContext);
   const {t, i18n} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const ModalView=()=>{
-    const radioButtons = useMemo(() => ([
-      {
+  const ModalView = () => {
+    const radioButtons = useMemo(
+      () => [
+        {
           id: '1',
           label: t('on'),
           value: 'option1',
-          color:'blue',
-          borderColor:'#ccc',
-          labelStyle:{
-            color:'black',
-            fontWeight:500,
-            fontSize:16
-          }
-      },
-      {
+          color: 'blue',
+          borderColor: '#ccc',
+          labelStyle: {
+            color: 'black',
+            fontWeight: 500,
+            fontSize: 16,
+          },
+        },
+        {
           id: '2',
           label: t('off'),
           value: 'option2',
-          color:'blue',
-          borderColor:'#ccc',
+          color: 'blue',
+          borderColor: '#ccc',
 
-          labelStyle:{
-            color:'black',
-            fontWeight:500,
-            fontSize:16
-          }
-      },
-      {
+          labelStyle: {
+            color: 'black',
+            fontWeight: 500,
+            fontSize: 16,
+          },
+        },
+        {
           id: '3',
           label: t('system'),
           value: 'option3',
-          color:'blue',
-          borderColor:'#ccc',
+          color: 'blue',
+          borderColor: '#ccc',
 
-          labelStyle:{
-            color:'black',
-            fontWeight:500,
-            fontSize:16
-          }
-      }
-  ]), []);
+          labelStyle: {
+            color: 'black',
+            fontWeight: 500,
+            fontSize: 16,
+          },
+        },
+      ],
+      [],
+    );
 
-  const [selectedId, setSelectedId] = useState();
+    const [selectedId, setSelectedId] = useState();
 
-  return (
-      <RadioGroup 
-          radioButtons={radioButtons} 
-          onPress={setSelectedId}
-          selectedId={selectedId}
-          containerStyle={{alignItems:'flex-start'}}
+    return (
+      <RadioGroup
+        radioButtons={radioButtons}
+        onPress={setSelectedId}
+        selectedId={selectedId}
+        containerStyle={{alignItems: 'flex-start'}}
       />
-  );
-  }
+    );
+  };
 
   return (
     <>
-      <View style={[styles.Container,context.theme==='light'?{}:{backgroundColor:'#232527'}]}>
-        <View style={[styles.Header,context.theme==='light'?{}:{backgroundColor:'#232527'}]}>
+      <ConAndRe style={styles.Container}>
+        <ConAndRe style={styles.Header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <FIcon name="angle-left" style={[styles.Icon,context.theme==='light'?{}:{color:'white'}]} />
+            <IconBack style={styles.Icon} />
           </TouchableOpacity>
-          <Text style={[styles.HeadText,context.theme==='light'?{}:{color:'white'}]}>{t('settings&Privacy')}</Text>
+          <AppText style={styles.HeadText}>{t('settings&Privacy')}</AppText>
           <TouchableOpacity>
-            <FIcon name="search" style={[styles.Icon,context.theme==='light'?{}:{color:'white'}]} />
+            <IconSearch style={styles.Icon} />
           </TouchableOpacity>
-        </View>
+        </ConAndRe>
         <ScrollView>
-          <View style={[styles.HeadView,context.theme==='light'?{}:{backgroundColor:'#323436'}]}>
+          <HeadView style={styles.HeadView}>
             <View style={styles.HeadTextContainer}>
               <View style={styles.MetaRow}>
                 <FAIcon name="infinity" style={styles.MetaIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#ddd'}]}>{t('meta')}</Text>
+                <TextDDD style={styles.SubHeadText1}>{t('meta')}</TextDDD>
               </View>
 
-              <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#ddd'}]}>{t('accountsCenter')}</Text>
-              <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>{t('myceaasamt')}</Text>
+              <TextDDD style={styles.SubHeadText1}>
+                {t('accountsCenter')}
+              </TextDDD>
+              <TextAAA style={styles.SubHeadTextSmall}>
+                {t('myceaasamt')}
+              </TextAAA>
               <TouchableOpacity style={styles.MetaRow}>
                 <MCIcon name="account-details" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>
+                <TextAAA style={styles.SubHeadTextSmall}>
                   {t('personalDetails')}
-                </Text>
+                </TextAAA>
               </TouchableOpacity>
               <TouchableOpacity style={styles.MetaRow}>
                 <MCIcon name="shield-lock-outline" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>
+                <TextAAA style={styles.SubHeadTextSmall}>
                   {t('passwordAndSecurity')}
-                </Text>
+                </TextAAA>
               </TouchableOpacity>
               <TouchableOpacity style={styles.MetaRow}>
                 <MCIcon
                   name="newspaper-variant-outline"
                   style={styles.SubIcon}
                 />
-                <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>
+                <TextAAA style={styles.SubHeadTextSmall}>
                   {t('adPreferences')}
-                </Text>
+                </TextAAA>
               </TouchableOpacity>
               <TouchableOpacity>
                 <Text style={styles.TextBlue}>{t('smiac')}</Text>
               </TouchableOpacity>
             </View>
-          </View>
-          <TouchableOpacity style={[styles.SubHeadView,context.theme==='light'?{}:{backgroundColor:'#323436'}]}>
+          </HeadView>
+          <ShortCutItem style={styles.SubHeadView}>
             <View style={styles.SecondSubHeadView}>
-              <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('privacyCheckup')}</Text>
-              <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>{t('agroyipass')}</Text>
+              <AppTextShortcut style={styles.SubHeadText1}>
+                {t('privacyCheckup')}
+              </AppTextShortcut>
+              <TextAAA style={styles.SubHeadTextSmall}>
+                {t('agroyipass')}
+              </TextAAA>
             </View>
             <View style={styles.PrivacyIcon}>
               <MCIcon name="archive-lock" style={styles.PrivacyIcon} />
             </View>
-          </TouchableOpacity>
+          </ShortCutItem>
 
           <View style={styles.Separator}></View>
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={[styles.LargeText,context.theme==='light'?{}:{color:'#eee'}]}>{t('preferences')}</Text>
-              <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>{t('cyeof')}</Text>
+              <AppTextShortcut style={styles.LargeText}>
+                {t('preferences')}
+              </AppTextShortcut>
+              <TextAAA style={styles.SubHeadTextSmall}>{t('cyeof')}</TextAAA>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <Icon name="ios-notifications" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('notifications')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('notifications')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <EIcon name="pin" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('navigationBar')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('navigationBar')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => navigation.navigate('LanguageAndRegionScreen')}
                 style={styles.Row}>
                 <Icon name="globe-sharp" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('languageAndRegion')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('languageAndRegion')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="play-box-multiple" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('media')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('media')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="clock-time-four" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('ytof')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('ytof')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <OIcon name="browser" style={styles.ResizeIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('browser')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('browser')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setModalVisible(true)}
                 style={styles.Row}>
                 <Icon name="moon" style={styles.ResizeIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('darkMode')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('darkMode')}
+                </AppTextShortcut>
               </TouchableOpacity>
             </View>
           </View>
@@ -366,44 +405,64 @@ const SettingDetailScreen = ({navigation}) => {
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={[styles.LargeText,context.theme==='light'?{}:{color:'#eee'}]}>{t('audienceAndVisibility')}</Text>
-              <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>{t('cwcsypsap')}</Text>
+              <AppTextShortcut style={styles.LargeText}>
+                {t('audienceAndVisibility')}
+              </AppTextShortcut>
+              <TextAAA style={styles.SubHeadTextSmall}>
+                {t('cwcsypsap')}
+              </TextAAA>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <UserIcon name="user-circle-o" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('profileDetails')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('profileDetails')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="contacts" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('hpfacy')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('hpfacy')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon
                   name="newspaper-variant-outline"
                   style={styles.SubIcon}
                 />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('posts')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('posts')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MIcon name="photo-library" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('stories')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('stories')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="movie-open-play" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('reels')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('reels')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <FAIcon name="tag" style={styles.ResizeIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('profileAndTagging')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('profileAndTagging')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MIcon name="block" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('blocking')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('blocking')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <FIcon name="radio-btn-active" style={styles.ResizeIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('activeStatus')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('activeStatus')}
+                </AppTextShortcut>
               </TouchableOpacity>
             </View>
           </View>
@@ -412,17 +471,25 @@ const SettingDetailScreen = ({navigation}) => {
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={[styles.LargeText,context.theme==='light'?{}:{color:'#eee'}]}>{t('yourActivity')}</Text>
-              <Text style={[styles.SubHeadTextSmall,context.theme==='light'?{}:{color:'#aaa'}]}>{t('aaloyaacsoyvs')}</Text>
+              <AppTextShortcut style={styles.LargeText}>
+                {t('yourActivity')}
+              </AppTextShortcut>
+              <TextAAA style={styles.SubHeadTextSmall}>
+                {t('aaloyaacsoyvs')}
+              </TextAAA>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <MIcon name="local-activity" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('activityLog')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('activityLog')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="devices" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('devicePermissions')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('devicePermissions')}
+                </AppTextShortcut>
               </TouchableOpacity>
             </View>
           </View>
@@ -431,26 +498,34 @@ const SettingDetailScreen = ({navigation}) => {
 
           <View style={styles.SectionContainer}>
             <View style={styles.SectionText}>
-              <Text style={[styles.LargeText,context.theme==='light'?{}:{color:'#eee'}]}>{t('csalp')}</Text>
+              <AppTextShortcut style={styles.LargeText}>
+                {t('csalp')}
+              </AppTextShortcut>
             </View>
             <View style={styles.TextPre}>
               <TouchableOpacity style={styles.Row}>
                 <EIcon name="book" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('termsOfService')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('termsOfService')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="database-arrow-left" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('privacyPolicy')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('privacyPolicy')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="arrow-collapse-vertical" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>{t('cookiesPolicy')}</Text>
+                <AppTextShortcut style={styles.SubHeadText1}>
+                  {t('cookiesPolicy')}
+                </AppTextShortcut>
               </TouchableOpacity>
               <TouchableOpacity style={styles.Row}>
                 <MCIcon name="check-decagram" style={styles.SubIcon} />
-                <Text style={[styles.SubHeadText1,context.theme==='light'?{}:{color:'#eee'}]}>
+                <AppTextShortcut style={styles.SubHeadText1}>
                   {t('communityStandards')}
-                </Text>
+                </AppTextShortcut>
               </TouchableOpacity>
             </View>
           </View>
@@ -471,13 +546,15 @@ const SettingDetailScreen = ({navigation}) => {
                   <Text style={styles.HeadTextDM}>{t('DarkMode')}</Text>
                 </View>
                 <View style={styles.SectionDevider}></View>
-                <ModalView/>
-                <Text style={{fontSize:16,marginLeft:16}}>{t('subSystem')}</Text>
+                <ModalView />
+                <Text style={{fontSize: 16, marginLeft: 16}}>
+                  {t('subSystem')}
+                </Text>
               </View>
             </Modal>
           </View>
         </ScrollView>
-      </View>
+      </ConAndRe>
     </>
   );
 };

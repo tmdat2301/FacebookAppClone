@@ -73,6 +73,18 @@ const IconBack = props => {
     </FIcon>
   );
 };
+const IconSearch = props => {
+  const context = useContext(ThemeContext);
+  const theme = context.theme;
+  return (
+    <FIcon
+      name="search"
+      size={14}
+      style={[props?.style, {color: theme === 'light' ? '#000' : '#fff'}]}>
+      {props?.children}
+    </FIcon>
+  );
+};
 
 const IconExpandUp = props => {
   const context = useContext(ThemeContext);
@@ -98,5 +110,6 @@ export {
   IconExpandDown,
   IconExpandUp,
   IconBack,
-  AppIconMessenger
+  AppIconMessenger,
+  IconSearch
 };

@@ -47,6 +47,19 @@ const SettingItem = props => {
     </TouchableOpacity>
   );
 };
+const HeadView = props => {
+  const context = useContext(ThemeContext);
+  const theme = context.theme;
+  return (
+    <View
+      style={[
+        props?.style,
+        theme === 'light' ? {} : {backgroundColor: '#323436'},
+      ]}>
+      {props?.children}
+    </View>
+  );
+};
 
 const ShortCutCard = props => {
   const context = useContext(ThemeContext);
@@ -138,5 +151,6 @@ export {
   SettingItem,
   ConAndRe,
   SectionDevider,
-  DevModal
+  DevModal,
+  HeadView
 };
