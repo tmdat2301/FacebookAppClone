@@ -1,11 +1,9 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext,memo} from 'react';
 import {
   StyleSheet,
   View,
   TextInput,
-  Text,
   TouchableOpacity,
-  Modal,
 } from 'react-native';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Avatar from './Avatar';
@@ -37,56 +35,10 @@ const styles = StyleSheet.create({
     height: 8,
     backgroundColor: '#D0D0D0',
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textStyle: {
-    color: 'blue',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop: 10,
-  },
-  modalText: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginTop: 15,
-    marginBottom: 15,
-    textAlign: 'center',
-    color: 'red',
-  },
-  modalView: {
-    width: '60%',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    borderTopWidth: 1,
-    borderColor: '#D0D0D0',
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    shadowOffset: {
-      height: -10,
-      width: 0,
-    },
-    elevation: 100,
-  },
-  SeparatorHorizontal: {
-    width: '100%',
-    height: 0.7,
-    backgroundColor: '#D0D0D0',
-  },
-  OkButton: {
-    width: 100,
-  },
 });
-const ToolBar = () => {
+const ToolBar = ({prop}) => {
   const context = useContext(ThemeContext);
   const {t} = useTranslation();
-  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
@@ -106,7 +58,7 @@ const ToolBar = () => {
             ]}></TextInput>
           <TouchableOpacity
             onPress={() => {
-              setModalVisible(true);
+              prop(true);
             }}>
             <MIcon name="photo-library" size={30} color="#4CAF50" />
           </TouchableOpacity>
@@ -119,36 +71,7 @@ const ToolBar = () => {
               : {backgroundColor: 'black'},
           ]}></View>
       </View>
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.centeredView}>
-            <View
-              style={[
-                styles.modalView,
-                context.theme === 'light'
-                  ? {backgroundColor: '#fff'}
-                  : {backgroundColor: '#232527', borderColor: '#232527'},
-              ]}>
-              <Text style={styles.modalText}>{t('funcDev')}</Text>
-              <View style={styles.SeparatorHorizontal}></View>
-              <View>
-                <TouchableOpacity
-                  style={styles.OkButton}
-                  onPress={() => setModalVisible(false)}>
-                  <Text style={styles.textStyle}>{t('ok')}</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
-      </View>
     </>
   );
 };
-export default ToolBar;
+export default memo(ToolBar);

@@ -2,14 +2,15 @@ import React, {useEffect, useState, useContext} from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  ScrollView,
   StyleSheet,
   Dimensions,
   FlatList,
   RefreshControl,
-  Text,
   View,
   ActivityIndicator,
+  TouchableOpacity,
+  Text,
+  Modal,
 } from 'react-native';
 import AppBar from '../../components/TabHomeComponents/AppBar.js';
 import ToolBar from '../../components/TabHomeComponents/ToolBar.js';
@@ -172,7 +173,7 @@ const RenderHomeScreen = ({item}) => {
 const TabHome = ({navigation}) => {
   const {t, i18n} = useTranslation();
   const context = useContext(ThemeContext);
-
+  const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshControl, setRefreshControl] = useState(false);
 
@@ -266,8 +267,8 @@ const TabHome = ({navigation}) => {
           }
           ListHeaderComponent={() => (
             <View>
-              <AppBar />
-              <ToolBar />
+              <AppBar  prop={setModalVisible}/>
+              <ToolBar prop={setModalVisible}/>
               <Story />
             </View>
           )}
@@ -291,6 +292,35 @@ const TabHome = ({navigation}) => {
           initialNumToRender={1}
           onEndReachedThreshold={0}
         />
+        <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View
+              style={[
+                styles.modalView,
+                context.theme === 'light'
+                  ? {backgroundColor: '#fff'}
+                  : {backgroundColor: '#232527', borderColor: '#232527'},
+              ]}>
+              <Text style={styles.modalText}>{t('funcDev')}</Text>
+              <View style={styles.SeparatorHorizontal}></View>
+              <View>
+                <TouchableOpacity
+                  style={styles.OkButton}
+                  onPress={() => setModalVisible(false)}>
+                  <Text style={styles.textStyle}>{t('ok')}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </View>
       </SafeAreaView>
     </>
   );
@@ -318,6 +348,51 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 16,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textStyle: {
+    color: 'blue',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  modalText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginTop: 15,
+    marginBottom: 15,
+    textAlign: 'center',
+    color: 'red',
+  },
+  modalView: {
+    width: '60%',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    borderTopWidth: 1,
+    borderColor: '#D0D0D0',
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowOffset: {
+      height: -10,
+      width: 0,
+    },
+    elevation: 100,
+  },
+  SeparatorHorizontal: {
+    width: '100%',
+    height: 0.7,
+    backgroundColor: '#D0D0D0',
+  },
+  OkButton: {
+    width: 100,
   },
 });
 export default TabHome;
