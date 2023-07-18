@@ -16,7 +16,11 @@ export default function actionForReducer(state = initialState, payload) {
         ...state,
         id: payload.id,
       };
-
+    case 'changeTheme':
+      return {
+        state: true,
+        id: payload.id,
+      };
     default:
       return state;
   }
