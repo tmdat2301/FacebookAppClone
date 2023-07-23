@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const Filters = () => {
   const [checkedItems, setCheckedItems] = useState([]);
-
+  const [priOptionOn, setPriOptionOn] = useState(false);
   const handleCheckboxChange = itemValue => {
     if (checkedItems.includes(itemValue)) {
       setCheckedItems(checkedItems.filter(item => item !== itemValue));
@@ -71,6 +71,8 @@ const Filters = () => {
       borderColor: '#aaa',
     },
   ];
+
+  const [workStatus, setWorkStatus] = useState('Medium');
 
   const [selected, setSelected] = React.useState('');
 
@@ -166,13 +168,65 @@ const Filters = () => {
         </View>
       </View>
 
-      <View style={styles.InputContainer}>
+      <View
+        style={[styles.InputContainer, {height: 150, alignItems: 'flex-end'}]}>
         <TextInput
           style={styles.Input}
           placeholder="Add a work"
           placeholderTextColor="#aaa"></TextInput>
+        {priOptionOn == true ? (
+          <View
+            style={{
+              height: 100,
+              width: 100,
+              position: 'absolute',
+              bottom: 34,
+              left: '50%',
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                setWorkStatus('High');
+                setPriOptionOn(false);
+              }}
+              style={styles.priOption}>
+              <Text style={{backgroundColor: '#D48BCF', padding: 5}}>High</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setWorkStatus('Medium');
+                setPriOptionOn(false);
+              }}
+              style={styles.priOption}>
+              <Text style={{backgroundColor: '#1790E5', padding: 5}}>
+                Medium
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setWorkStatus('Low');
+                setPriOptionOn(false);
+              }}
+              style={styles.priOption}>
+              <Text style={{backgroundColor: '#808080', padding: 5}}>Low</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <></>
+        )}
+
+        <TouchableOpacity
+          onPress={() => {
+            setPriOptionOn(!priOptionOn);
+          }}>
+          <View style={styles.OptionButton}>
+            <View style={{flexDirection: 'row', height: 40}}>
+              <Text style={styles.Add}>{workStatus}</Text>
+              <Icon style={[styles.Icon, {marginLeft: 0}]} name="down" />
+            </View>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity>
-          <View style={styles.AddButton}>
+          <View style={[styles.AddButton, {maxHeight: 40}]}>
             <Text style={styles.Add}>Add</Text>
           </View>
         </TouchableOpacity>
@@ -187,7 +241,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: '5%',
     marginRight: '5%',
-    justifyContent:'space-between'
+    justifyContent: 'space-between',
   },
   SearchContainer: {
     marginBottom: 5,
@@ -223,9 +277,19 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     borderWidth: 1,
     flex: 1,
-    backgroundColor:'#40A9FF',
+    backgroundColor: '#40A9FF',
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
+  },
+  OptionButton: {
+    height: 40,
+    marginTop: 6,
+    marginBottom: 6,
+    borderWidth: 1,
+    flex: 1,
+    backgroundColor: '#1790E5',
+    maxHeight: 40,
+    position: 'relative',
   },
   Icon: {
     height: 40,
@@ -240,8 +304,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     marginLeft: 12,
     marginRight: 12,
-    color:'white',
-    backgroundColor:'#40A9FF'
+    color: 'white',
   },
   InputContainer: {
     flexDirection: 'row',
@@ -262,5 +325,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  priOption: {
+    // height: 33,
   },
 });
